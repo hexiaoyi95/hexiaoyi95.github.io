@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Xiaoyi&#39;s note</title>
+  
+  <subtitle>Xiaoyi He&#39;s personal blog</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://hexiaoyi95.github.io/"/>
+  <updated>2018-04-15T14:58:48.922Z</updated>
+  <id>https://hexiaoyi95.github.io/</id>
+  
+  <author>
+    <name>Xiaoyi He / 何晓艺</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>first-post</title>
+    <link href="https://hexiaoyi95.github.io/2018/04/15/first-post/"/>
+    <id>https://hexiaoyi95.github.io/2018/04/15/first-post/</id>
+    <published>2018-04-15T14:58:48.000Z</published>
+    <updated>2018-04-15T14:58:48.922Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
