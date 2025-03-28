@@ -8,7 +8,7 @@
   }
   
   body {
-    @apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+    @apply bg-gray-50 text-gray-900 dark:bg-night dark:text-snow;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -22,7 +22,7 @@
   }
   
   .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-aurora hover:bg-aurora-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-aurora;
   }
   
   .btn-secondary {
@@ -30,14 +30,18 @@
   }
   
   .card {
-    @apply bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg;
+    @apply bg-white dark:bg-night-lighter overflow-hidden shadow rounded-lg border border-gray-200 dark:border-night-light;
   }
   
   .nav-link {
-    @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400;
+    @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-aurora dark:hover:text-aurora-light;
   }
   
   .nav-link-active {
-    @apply text-primary-600 dark:text-primary-400;
+    @apply text-aurora dark:text-aurora-light;
+  }
+
+  .aurora-gradient {
+    @apply bg-gradient-to-r from-aurora-dark via-aurora to-aurora-light;
   }
 } 

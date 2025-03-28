@@ -1,19 +1,8 @@
-import { Inter, Merriweather } from 'next/font/google';
 import '@/styles/globals.css';
 import Layout from '@/components/Layout/Layout';
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-});
-
-const merriweather = Merriweather({
-  subsets: ['latin'],
-  weight: ['300', '400', '700', '900'],
-  display: 'swap',
-  variable: '--font-merriweather',
-});
+// Removed Google Font imports due to connection issues
+// Using system fonts as fallbacks
 
 export const metadata = {
   title: 'Xiaoyi He - Personal Website',
@@ -26,7 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${merriweather.variable}`}>
+    <html lang="en">
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body>
         <Layout>{children}</Layout>
       </body>
