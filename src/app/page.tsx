@@ -65,21 +65,21 @@ export default function HomePage() {
           </div>
 
           {/* Moving content sections inside hero */}
-          <div className="p-8 mt-8 text-left">
+          <div className="p-4 sm:p-8 mt-4 sm:mt-8 text-left">
             {/* About Section */}
-            <section className="mb-16">
-              <h2 className="text-3xl font-bold mb-6 border-b border-aurora pb-2 text-snow text-shadow-sm">About Me</h2>
-              <div className="grid md:grid-cols-2 gap-8">
+            <section className="mb-8 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 border-b border-aurora pb-2 text-snow text-shadow-sm">About Me</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                 <div>
-                  <p className="text-lg mb-4 text-snow text-shadow-sm">
+                  <p className="text-base sm:text-lg mb-3 sm:mb-4 text-snow text-shadow-sm">
                     I am a Senior Video Architect at Nvidia, focusing on DLSS frame generation research. Previously, I worked 
                     at Bilibili Group implementing video compression technologies.
                   </p>
-                  <p className="text-lg mb-4 text-snow text-shadow-sm">
+                  <p className="text-base sm:text-lg mb-3 sm:mb-4 text-snow text-shadow-sm">
                     I received my Master's and Bachelor's degrees in Electronics Engineering from Shanghai Jiao Tong University,
                     specializing in artificial intelligence and deep learning for image/video processing.
                   </p>
-                  <p className="text-lg text-snow text-shadow-sm">
+                  <p className="text-base sm:text-lg text-snow text-shadow-sm">
                     My work has been recognized with the "Best Demo of The Year" award at Microsoft Research Asia Symposium for 
                     my intelligent surveillance system project.
                   </p>
@@ -124,19 +124,19 @@ export default function HomePage() {
 
             {/* Latest Work Section */}
             <section className="mb-4">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-3xl font-bold border-b border-aurora pb-2 text-snow text-shadow-sm">Latest Work</h2>
-                <Link href="/projects" className="text-aurora-light hover:text-aurora-lighter flex items-center">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6">
+                <h2 className="text-2xl sm:text-3xl font-bold border-b border-aurora pb-2 text-snow text-shadow-sm">Latest Work</h2>
+                <Link href="/projects" className="text-aurora-light hover:text-aurora-lighter flex items-center mt-2 sm:mt-0">
                   View all <FaArrowRight className="ml-1" />
                 </Link>
               </div>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {/* Project Card 1 */}
                 <div className="card group hover:shadow-lg transition-all duration-300 bg-night-lighter bg-opacity-30 backdrop-blur-sm rounded-lg border border-aurora-darker border-opacity-30">
                   <div className="h-2 aurora-gradient"></div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">Deep Learning Video Compression</h3>
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">Deep Learning Video Compression</h3>
                     <p className="text-gray-300 mb-4 text-shadow-sm">
                       A novel CNN utilizing partition information to enhance compressed videos, achieving 10% bitrate savings on benchmark sequences.
                     </p>
@@ -150,7 +150,7 @@ export default function HomePage() {
                 <div className="card group hover:shadow-lg transition-all duration-300 bg-night-lighter bg-opacity-30 backdrop-blur-sm rounded-lg border border-aurora-darker border-opacity-30">
                   <div className="h-2 aurora-gradient"></div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">Intelligent Surveillance System</h3>
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">Intelligent Surveillance System</h3>
                     <p className="text-gray-300 mb-4 text-shadow-sm">
                       Real-time deep learning based fall detection algorithm with over 80% accuracy, winning "Best Demo" at Microsoft Research Asia Symposium.
                     </p>
@@ -164,7 +164,7 @@ export default function HomePage() {
                 <div className="card group hover:shadow-lg transition-all duration-300 bg-night-lighter bg-opacity-30 backdrop-blur-sm rounded-lg border border-aurora-darker border-opacity-30">
                   <div className="h-2 aurora-gradient"></div>
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">Lossless Compression for Skeletons</h3>
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">Lossless Compression for Skeletons</h3>
                     <p className="text-gray-300 mb-4 text-shadow-sm">
                       Implemented a lossless compression method for skeleton data in videos based on spatial-temporal correlation, achieving 84% compression ratio.
                     </p>

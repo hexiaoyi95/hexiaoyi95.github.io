@@ -157,12 +157,12 @@ const skills = {
 
 export default function ResumePage() {
   return (
-    <div className="container mx-auto py-12">
+    <div className="container mx-auto py-8 px-4 sm:py-12">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="flex justify-between items-start mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start mb-6 sm:mb-8">
           <div>
-            <h1 className="text-4xl font-bold mb-2">何晓艺/Shawn He</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold mb-2">何晓艺/Shawn He</h1>
             <h2 className="text-2xl text-gray-600 dark:text-gray-400 mb-4">
               {/*Software Engineer*/}
             </h2>
@@ -171,14 +171,14 @@ export default function ResumePage() {
               <p>xiaoyi.he@outlook.com</p>
             </div>
           </div>
-          <button className="btn">
+          <button className="btn mt-4 sm:mt-0">
             <FaDownload className="mr-2" /> Download CV
           </button>
         </div>
 
         {/* Education Section */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 pb-2 border-b border-aurora flex items-center">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 pb-2 border-b border-aurora flex items-center">
             <FaGraduationCap className="mr-2 text-aurora" /> Education
           </h2>
           <div className="space-y-6">
@@ -202,11 +202,11 @@ export default function ResumePage() {
         </section>
 
         {/* Experience Section */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 pb-2 border-b border-aurora flex items-center">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 pb-2 border-b border-aurora flex items-center">
             <FaBriefcase className="mr-2 text-aurora" /> Work Experience
           </h2>
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {experience.map((exp, index) => (
               <div key={index}>
                 <div className="flex justify-between mb-1">
@@ -230,8 +230,8 @@ export default function ResumePage() {
         </section>
 
         {/* Research Projects Section */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 pb-2 border-b border-aurora flex items-center">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 pb-2 border-b border-aurora flex items-center">
             <FaCode className="mr-2 text-aurora" /> Research Projects
           </h2>
           <div className="space-y-6">
@@ -248,13 +248,13 @@ export default function ResumePage() {
         </section>
 
         {/* Publications Section */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 pb-2 border-b border-aurora flex items-center">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 pb-2 border-b border-aurora flex items-center">
             <FaNewspaper className="mr-2 text-aurora" /> Publications
           </h2>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {publications.map((pub, index) => (
-              <div key={index} className="bg-white dark:bg-night-lighter p-4 rounded-lg shadow-sm">
+              <div key={index} className="bg-white dark:bg-night-lighter p-3 sm:p-4 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold mb-1">{pub.title}</h3>
                 <p className="text-aurora dark:text-aurora-light">{pub.authors}</p>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -278,11 +278,11 @@ export default function ResumePage() {
         </section>
 
         {/* Skills Section */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6 pb-2 border-b border-aurora flex items-center">
+        <section className="mb-8 sm:mb-12">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 pb-2 border-b border-aurora flex items-center">
             <FaCode className="mr-2 text-aurora" /> Skills & Achievements
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <h3 className="text-xl font-semibold mb-3 flex items-center">
                 <span className="h-4 w-1 bg-aurora mr-2"></span>

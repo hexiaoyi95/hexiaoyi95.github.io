@@ -79,13 +79,13 @@ export default function ProjectsPage() {
   const otherProjects = projects.filter(project => !project.featured);
 
   return (
-    <div className="container mx-auto py-12">
-      <h1 className="text-4xl font-bold mb-8">Projects</h1>
+    <div className="container mx-auto py-8 px-4 sm:py-12 sm:px-4">
+      <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">Projects</h1>
       
       {/* Featured Projects */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6">Featured Projects</h2>
-        <div className="grid md:grid-cols-2 gap-8">
+      <section className="mb-10 sm:mb-16">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Featured Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {featuredProjects.map((project) => (
             <div key={project.id} className="card overflow-hidden">
               {/* Project Image Placeholder */}
@@ -93,9 +93,9 @@ export default function ProjectsPage() {
                 Project Image
               </div>
               {/* Project Details */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold mb-2">{project.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{project.description}</p>
                 
                 {/* Technologies */}
                 <div className="mb-4">
@@ -135,12 +135,12 @@ export default function ProjectsPage() {
       
       {/* Other Projects */}
       <section>
-        <h2 className="text-2xl font-bold mb-6">Other Projects</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Other Projects</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {otherProjects.map((project) => (
-            <div key={project.id} className="card p-6">
-              <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
+            <div key={project.id} className="card p-4 sm:p-6">
+              <h3 className="text-lg sm:text-xl font-bold mb-2">{project.title}</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{project.description}</p>
               
               {/* Technologies */}
               <div className="mb-4">

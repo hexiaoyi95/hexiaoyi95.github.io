@@ -5,14 +5,22 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    touch-action: manipulation;
   }
   
   body {
-    @apply bg-gray-50 text-gray-900 dark:bg-night dark:text-snow;
+    @apply bg-gray-50 text-gray-900 dark:bg-night dark:text-snow overflow-x-hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+  }
+
+  /* Improve input fields on mobile */
+  input, select, textarea, button {
+    @apply text-base;
+    font-size: 16px; /* Prevents zoom on focus in iOS */
   }
 }
 
@@ -22,7 +30,7 @@
   }
   
   .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-aurora hover:bg-aurora-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-aurora;
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-aurora hover:bg-aurora-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-aurora min-h-[44px] min-w-[44px];
   }
   
   .btn-secondary {
@@ -43,5 +51,24 @@
 
   .aurora-gradient {
     @apply bg-gradient-to-r from-aurora-dark via-aurora to-aurora-light;
+  }
+}
+
+/* Mobile optimizations */
+@layer utilities {
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  .prevent-overflow {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Optimized scrolling experience */
+  .momentum-scroll {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
   }
 } 
