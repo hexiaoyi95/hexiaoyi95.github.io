@@ -24,7 +24,10 @@ const publications = [
     authors: 'He, Xiaoyi, et al.',
     abstract: 'This paper presents a lossless compression method for skeleton data in videos based on spatial and temporal correlation, achieving about 84% compression ratio on test surveillance sequences.',
     citations: 2,
-    links: [],
+    link: 'https://ieeexplore.ieee.org/document/8794871',
+    links: [
+      { type: 'external', url: 'https://ieeexplore.ieee.org/document/8794871', label: 'Paper' },
+    ],
   },
   {
     title: 'Partition-aware Adaptive Switching Networks for Post-processing in HEVC',
@@ -49,7 +52,10 @@ const publications = [
     authors: 'Lin, Weiyao, He, Xiaoyi, et al.',
     abstract: 'This paper presents a lossless compression method for key-point sequences in videos to enable efficient intelligent video analysis.',
     citations: 23,
-    links: [],
+    link: 'https://ieeexplore.ieee.org/document/9080093/',
+    links: [
+      { type: 'external', url: 'https://ieeexplore.ieee.org/document/9080093/', label: 'Paper' },
+    ],
   },
   {
     title: 'Adaptive Lossless Compression of Skeleton Sequences',
@@ -58,7 +64,10 @@ const publications = [
     authors: 'Lin, Weiyao, Shinde, TS, Dai, Wenrui, Liu, Ming, He, Xiaoyi, et al.',
     abstract: 'An adaptive compression framework for skeleton data that dynamically selects optimal coding methods based on data characteristics.',
     citations: 2,
-    links: [],
+    link: 'https://www.sciencedirect.com/science/article/pii/S092359652030001X',
+    links: [
+      { type: 'external', url: 'https://www.sciencedirect.com/science/article/pii/S092359652030001X', label: 'Paper' },
+    ],
   },
 ];
 

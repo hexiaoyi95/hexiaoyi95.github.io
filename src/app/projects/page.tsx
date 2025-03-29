@@ -6,14 +6,26 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 // Projects data for Xiaoyi He from resume
 const projects = [
   {
+    id: 'nvidia-smooth-motion',
+    title: 'NVIDIA Smooth Motion',
+    description: 'Core contributor to NVIDIA\'s driver-level frame generation solution.',
+    image: '/images/projects/SMOOTH-MOTION.png',
+    technologies: ['DLSS', 'Frame Generation', 'AI Graphics'],
+    links: [
+      { type: 'external', url: 'https://www.nvidia.com/en-us/geforce/news/nvidia-app-update-dlss-overrides-and-more/', label: 'Release Announcement' },
+    ],
+    featured: true,
+  },
+  {
     id: 'deep-learning-video-compression',
     title: 'Deep Learning Based Video Compression',
     description: 'Proposed a novel CNN utilizing partition information in video encoder to enhance compressed videos (deblocking). Achieved about 10% bitrate saving on benchmark sequences. Paper accepted by ICIP 2019 (oral) and won 2nd prize in ChinaMM 2018 challenge.',
-    image: '/images/projects/video-compression.jpg',
+    image: '/images/projects/video-compression.png',
     technologies: ['CNN', 'HEVC', 'Python', 'PyTorch', 'Video Processing'],
     links: [
       { type: 'github', url: 'https://github.com/hexiaoyi95/Partition-aware', label: 'GitHub' },
       { type: 'external', url: 'https://arxiv.org/abs/1912.11604', label: 'Paper' },
+      { type: 'project', url: 'https://min.sjtu.edu.cn/lwydemo/HEVCpostprocessing.html', label: 'Project Page' },
     ],
     featured: true,
   },
@@ -30,47 +42,14 @@ const projects = [
   },
   {
     id: 'lossless-compression-for-skeletons',
-    title: 'Lossless Compression for Skeletons Data',
+    title: 'Adaptive lossless compression of skeleton sequences',
     description: 'Implemented a lossless compression method for skeletons data in videos based on spatial and temporal correlation. Achieved about 84% compression ratio on test surveillance sequences. Published two papers and had one proposal accepted.',
-    image: '/images/projects/skeletons-compression.jpg',
+    image: '/images/projects/skeletons-compression.png',
     technologies: ['Lossless Compression', 'Skeleton Tracking', 'C++', 'Video Analysis'],
     links: [
-      { type: 'external', url: '#', label: 'IEEE MultiMedia' },
+      { type: 'external', url: 'https://www.sciencedirect.com/science/article/abs/pii/S0923596519306034', label: 'Paper' },
     ],
     featured: true,
-  },
-  {
-    id: 'end-to-end-image-video-compression',
-    title: 'End-to-end Deep Learning Image/Video Compression',
-    description: 'Surveyed on end-to-end deep learning based image/video compression. Implemented novel ideas and experimental verifications for next-generation compression techniques.',
-    image: '/images/projects/end-to-end-compression.jpg',
-    technologies: ['Neural Networks', 'End-to-end Learning', 'TensorFlow', 'Python'],
-    links: [
-      { type: 'external', url: '#', label: 'Research Paper' },
-    ],
-    featured: false,
-  },
-  {
-    id: 'nvidia-smooth-motion',
-    title: 'NVIDIA Smooth Motion',
-    description: 'Core contributor to NVIDIA\'s driver-level frame generation solution. Researched and improved frame interpolation algorithms and optical flow accelerator algorithms.',
-    image: '/images/projects/nvidia-frame-generation.jpg',
-    technologies: ['DLSS', 'Frame Generation', 'CUDA', 'C++', 'Optical Flow'],
-    links: [
-      { type: 'external', url: 'https://www.nvidia.com/en-us/geforce/technologies/dlss/', label: 'NVIDIA DLSS' },
-    ],
-    featured: false,
-  },
-  {
-    id: 'video-quality-testing',
-    title: 'Video Quality Testing Platform',
-    description: 'Built a comprehensive video subjective quality blind testing platform, accelerating video algorithm development and verification. The platform includes automated testing, data collection, and statistical analysis.',
-    image: '/images/projects/video-quality.jpg',
-    technologies: ['FFmpeg', 'Python', 'Web Development', 'Statistics'],
-    links: [
-      { type: 'external', url: '#', label: 'Demo' },
-    ],
-    featured: false,
   },
 ];
 
@@ -88,9 +67,13 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {featuredProjects.map((project) => (
             <div key={project.id} className="card overflow-hidden">
-              {/* Project Image Placeholder */}
-              <div className="h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-500 dark:text-gray-400">
-                Project Image
+              {/* Project Image */}
+              <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={`${project.title} preview`}
+                  className="w-full h-full object-cover"
+                />
               </div>
               {/* Project Details */}
               <div className="p-4 sm:p-6">
@@ -139,6 +122,14 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {otherProjects.map((project) => (
             <div key={project.id} className="card p-4 sm:p-6">
+              {/* Add image for other projects too */}
+              <div className="h-36 mb-3 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded">
+                <img 
+                  src={project.image} 
+                  alt={`${project.title} preview`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">{project.title}</h3>
               <p className="text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{project.description}</p>
               
