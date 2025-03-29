@@ -1,8 +1,9 @@
 'use client';
 
 import { FaDownload, FaUser, FaGraduationCap, FaBriefcase, FaCode, FaNewspaper, FaTrophy } from 'react-icons/fa';
-import React from 'react';
+import React, { useRef } from 'react';
 import publications from '@/data/publications';
+import { generatePDF } from '@/utils/pdfGenerator';
 
 // Resume data for Xiaoyi He from CV
 const education = [
@@ -112,8 +113,9 @@ const skills = {
     'Research Areas: Computer Vision, Video Compression, Deep Learning',
   ],
   achievements: [
+    'One paper about frame generation is accepted by NVIDIA internal conference (NTech 2024, 200/900+ submissions)',
     'Second prize in "Deep-learning based Post Processing for Compressed Images" challenge (ChinaMM 2018)',
-    <a href="https://www.microsoft.com/en-us/research/blog/visual-intelligence-smart-home-security/" target="_blank" rel="noopener noreferrer">Best Demo of The Year Award at Microsoft Research Asia Symposium</a>,
+    <a href="https://www.microsoft.com/en-us/research/blog/visual-intelligence-smart-home-security/" target="_blank" rel="noopener noreferrer" className="text-aurora hover:text-aurora-dark">Best Demo of The Year Award at Microsoft Research Asia Symposium</a>,
     'Merit Student of Shanghai Jiao Tong University',
     'National Encouragement Scholarship',
   ],
@@ -123,9 +125,81 @@ export default function ResumePage() {
   // Sort publications by citation count (highest first)
   const sortedPublications = [...publications].sort((a, b) => (b.citations || 0) - (a.citations || 0));
   
+  // Reference to the resume content container
+  const resumeRef = useRef<HTMLDivElement>(null);
+  
+  // State for tracking PDF generation
+  const [isGeneratingPDF, setIsGeneratingPDF] = React.useState(false);
+  const [pdfError, setPdfError] = React.useState<string | null>(null);
+  const [pdfSuccess, setPdfSuccess] = React.useState<boolean>(false);
+  const [pdfFilename, setPdfFilename] = React.useState<string>('');
+  
+  // Function to handle PDF generation
+  const handleDownloadPDF = async () => {
+    if (resumeRef.current && !isGeneratingPDF) {
+      try {
+        setPdfError(null);
+        setPdfSuccess(false);
+        setPdfFilename('');
+        setIsGeneratingPDF(true);
+        
+        // Clone the content to prevent modifications to the actual DOM
+        const clonedContent = resumeRef.current.cloneNode(true) as HTMLElement;
+        
+        // Remove the download button from the cloned content
+        const downloadButton = clonedContent.querySelector('.download-btn');
+        if (downloadButton && downloadButton.parentNode) {
+          downloadButton.parentNode.removeChild(downloadButton);
+        }
+        
+        // Create a timestamp for the filename
+        const now = new Date();
+        const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${String(now.getHours()).padStart(2, '0')}-${String(now.getMinutes()).padStart(2, '0')}`;
+        const filename = `Xiaoyi_He_CV_${timestamp}.pdf`;
+        
+        // Generate the PDF
+        const success = await generatePDF(clonedContent, filename);
+        
+        if (!success) {
+          setPdfError('Failed to generate PDF. Please try again.');
+        } else {
+          setPdfSuccess(true);
+          setPdfFilename(filename);
+        }
+      } catch (error) {
+        console.error('Error generating PDF:', error);
+        setPdfError('An error occurred while generating the PDF.');
+      } finally {
+        setIsGeneratingPDF(false);
+      }
+    }
+  };
+  
+  // Clear error after some time
+  React.useEffect(() => {
+    if (pdfError) {
+      const timer = setTimeout(() => {
+        setPdfError(null);
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [pdfError]);
+  
+  // Clear success message after some time
+  React.useEffect(() => {
+    if (pdfSuccess) {
+      const timer = setTimeout(() => {
+        setPdfSuccess(false);
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [pdfSuccess]);
+  
   return (
     <div className="container mx-auto py-8 px-4 sm:py-12">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto" ref={resumeRef}>
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start mb-6 sm:mb-8">
           <div>
@@ -138,10 +212,42 @@ export default function ResumePage() {
               <p>xiaoyi.he@outlook.com</p>
             </div>
           </div>
-          <button className="btn mt-4 sm:mt-0">
-            <FaDownload className="mr-2" /> Download CV
+          <button 
+            onClick={handleDownloadPDF}
+            className="btn mt-4 sm:mt-0 inline-flex items-center download-btn"
+            disabled={isGeneratingPDF}
+          >
+            {isGeneratingPDF ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Generating...
+              </>
+            ) : (
+              <>
+                <FaDownload className="mr-2" /> Download CV
+              </>
+            )}
           </button>
         </div>
+        
+        {/* Error message */}
+        {pdfError && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+            <span className="block sm:inline">{pdfError}</span>
+          </div>
+        )}
+        
+        {/* Success message */}
+        {pdfSuccess && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4" role="alert">
+            <span className="block sm:inline">
+              PDF generated successfully! Your file <strong>{pdfFilename}</strong> is being downloaded.
+            </span>
+          </div>
+        )}
 
         {/* Education Section */}
         <section className="mb-8 sm:mb-12">
@@ -255,7 +361,7 @@ export default function ResumePage() {
           <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 pb-2 border-b border-aurora flex items-center">
             <FaCode className="mr-2 text-aurora" /> Skills & Achievements
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="space-y-6">
             <div>
               <h3 className="text-xl font-semibold mb-3 flex items-center">
                 <span className="h-4 w-1 bg-aurora mr-2"></span>
