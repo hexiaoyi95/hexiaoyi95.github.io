@@ -78,6 +78,21 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
             }
           }
           
+          // Style sub-bullets properly
+          if (el.classList.contains('list-circle')) {
+            el.style.marginLeft = '12px';
+            el.style.marginTop = '2px';
+            el.style.marginBottom = '2px';
+          }
+          
+          // Style sub-bullets list items
+          if (el.tagName === 'LI' && el.parentElement?.classList.contains('list-circle')) {
+            el.style.fontSize = '0.9em';
+            el.style.color = '#444';
+            el.style.marginBottom = '1px';
+            el.style.marginTop = '1px';
+          }
+          
           // Make sections more compact
           if (el.tagName === 'SECTION') {
             el.style.marginBottom = '4px';

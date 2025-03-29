@@ -52,6 +52,11 @@
   .aurora-gradient {
     @apply bg-gradient-to-r from-aurora-dark via-aurora to-aurora-light;
   }
+  
+  /* Resume list styling */
+  .list-circle {
+    list-style-type: circle;
+  }
 }
 
 /* Mobile optimizations */

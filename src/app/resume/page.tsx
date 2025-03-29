@@ -30,8 +30,27 @@ const experience = [
     location: 'Shanghai, China',
     period: 'May 2021 - Present',
     description: [
-      'DLSS frame generation research. Core contributor of Nvidia Smooth Motion, a driver-level frame generation solution',
-      'Optical flow acceletor algorithm research and improvement',
+      {
+        text: 'DLSS frame generation research. Core contributor of Nvidia Smooth Motion',
+        // subItems: [
+        //   'Researched and implemented first driver-level frame generation model with shippable quality ',
+        //   'Continously contributed to quality improvement and performance optimization',
+        // ]
+      },
+      
+      {
+        text: 'Video frame generation research',
+      },
+      {
+        text: 'Efficient frame generation for autonomous driving with Nvidia OFA hardware',
+      },
+      {
+        text: 'Optical flow acceletor algorithm research and improvement',
+        // subItems: [
+        //   'Efficient e2e optical flow estimation network design and implementation',
+        //   'Hybrid optical flow estimation method design and implementation: learnable matching cost, confidence prediction',
+        // ]
+      },
     ]
   },
   {
@@ -40,11 +59,29 @@ const experience = [
     location: 'Shanghai, China',
     period: 'Apr 2020 - May 2021',
     description: [
-      'Design, optimization and implementation of video compression adaptive preprocessing engine (FFmpeg+TensorRT), involving technologies such as quality assessment, denoising, enhancement, etc. For UGC videos, it saves approximately 10% bitrate at the same quality level.',
-      'Familiar with C/C++ implementation of various denoising and enhancement algorithms, and their integration with FFmpeg.',
-      'In-depth understanding of video coding standards (H.264, H.265) and algorithms, participated in assembly optimization of encoders.',
-      'Built a video subjective quality blind testing platform to accelerate video algorithm development and verification.',
-      'Built a video encoder testing visualization platform to accelerate encoder development and algorithm verification.'
+      {
+        text: 'Design, implementation and optimization of video compression adaptive preprocessing engine (FFmpeg+TensorRT)',
+        subItems: [
+          'involving technologies such as quality assessment, denoising, enhancement, etc',
+          'For UGC videos, it saves approximately 10% bitrate at the same quality level',
+        ]
+      },
+      {
+        text: 'Familiar with C/C++ implementation of various denoising and enhancement algorithms, and their integration with FFmpeg.',
+        subItems: []
+      },
+      {
+        text: 'Participated in assembly optimization of video encoders',
+        subItems: []
+      },
+      {
+        text: 'Built a video subjective quality blind testing platform to accelerate video algorithm development and verification.',
+        subItems: []
+      },
+      {
+        text: 'Built a video encoder testing visualization platform to accelerate encoder development and algorithm verification.',
+        subItems: []
+      }
     ],
   },
   {
@@ -53,10 +90,22 @@ const experience = [
     location: 'Shanghai, China',
     period: '2015 - 2019',
     description: [
-      'Advisor: Prof. Weiyao Lin',
-      'Focused on Action Recognition, DL-based Video Compression, and Features Compression',
-      'Developed algorithms for image/video enhancement and compression using deep learning',
-      'Conducted research on intelligent surveillance systems and human activity recognition',
+      {
+        text: 'Advisor: Prof. Weiyao Lin. Focused on Action Recognition, DL-based Video Compression, and Features Compression',
+        subItems: []
+      },
+      {
+        text: 'Developed algorithms for lossless skeleton data compression',
+        subItems: []
+      },
+      {
+        text: 'Developed algorithms for compressed video enhancement using deep learning',
+        subItems: []
+      },
+      {
+        text: 'Participated in intelligent surveillance systems and developed human activity recognition algorithms',
+        subItems: []
+      },
     ],
   },
   {
@@ -65,8 +114,14 @@ const experience = [
     location: 'Shanghai, China',
     period: 'Jul 2019 - Sep 2019',
     description: [
-      'Research and development of super-resolution algorithms',
-      'Applied deep learning techniques to enhance low-resolution images and videos',
+      {
+        text: 'Research and development of super-resolution algorithms',
+        subItems: []
+      },
+      {
+        text: 'Applied deep learning techniques to enhance low-resolution images and videos',
+        subItems: []
+      },
     ],
   },
   {
@@ -75,9 +130,18 @@ const experience = [
     location: 'Shanghai, China',
     period: 'Mar 2017 - Sep 2017',
     description: [
-      'Implemented a cross-framework test tool for deep learning frameworks (TensorFlow & Chainer)',
-      'Developed applications for layer accuracy, convergence, and performance testing',
-      'Enabled daily testing based on Jenkins and cluster infrastructure',
+      {
+        text: 'Implemented a cross-framework test tool for deep learning frameworks (TensorFlow & Chainer)',
+        subItems: []
+      },
+      {
+        text: 'Developed applications for layer accuracy, convergence, and performance testing',
+        subItems: []
+      },
+      {
+        text: 'Enabled daily testing based on Jenkins and cluster infrastructure',
+        subItems: []
+      },
     ],
   },
 ];
@@ -292,9 +356,18 @@ export default function ResumePage() {
                   </div>
                   <div className="text-gray-600 dark:text-gray-400">{exp.location}</div>
                 </div>
-                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-1">
+                <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
                   {exp.description.map((item, idx) => (
-                    <li key={idx}>{item}</li>
+                    <li key={idx} className="mb-1">
+                      <div className="inline">{item.text}</div>
+                      {item.subItems && item.subItems.length > 0 && (
+                        <ul className="list-circle list-inside ml-6 mt-1 space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                          {item.subItems.map((subItem, subIdx) => (
+                            <li key={subIdx}>{subItem}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </li>
                   ))}
                 </ul>
               </div>
