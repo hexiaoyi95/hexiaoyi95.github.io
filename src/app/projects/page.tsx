@@ -21,7 +21,7 @@ const projects = [
     id: 'intelligent-surveillance-system',
     title: 'Intelligent Surveillance System',
     description: 'Established a dataset for human fall detection. Developed a real-time deep learning based fall detection algorithm with over 80% accuracy. Won "Best Demo of the Year" award at Microsoft Research Asia Symposium in 2017.',
-    image: '/images/projects/surveillance.jpg',
+    image: '/images/projects/surveillance.png',
     technologies: ['Deep Learning', 'Computer Vision', 'Real-time Detection', 'Python'],
     links: [
       { type: 'external', url: 'https://www.microsoft.com/en-us/research/blog/visual-intelligence-smart-home-security/', label: 'Microsoft Research' },

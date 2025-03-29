@@ -6,7 +6,7 @@ import { FaGithub, FaLinkedin, FaEnvelope, FaRss } from 'react-icons/fa';
 const socialLinks = [
   { name: 'GitHub', href: 'https://github.com/hexiaoyi95', icon: FaGithub },
   { name: 'LinkedIn', href: 'https://linkedin.com/in/xiaoyihe', icon: FaLinkedin },
-  { name: 'Email', href: 'mailto:xiaoyi.he@example.com', icon: FaEnvelope },
+  { name: 'Email', href: 'mailto:xiaoyi.he@outlook.com', icon: FaEnvelope },
   { name: 'RSS', href: '/rss.xml', icon: FaRss },
 ];
 

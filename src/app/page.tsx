@@ -129,17 +129,31 @@ export default function HomePage() {
                 <div className="card group hover:shadow-lg transition-all duration-300 bg-night-lighter bg-opacity-30 backdrop-blur-sm rounded-lg border border-aurora-darker border-opacity-30">
                   <div className="h-2 aurora-gradient"></div>
                   <div className="p-4 sm:p-6">
-                    <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">NVIDIA Smooth Motion</h3>
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">NVIDIA DLSS 4 Frame Generation</h3>
                     <p className="text-xs sm:text-sm text-gray-300 mb-3 sm:mb-4 text-shadow-sm">
-                      Core contributor to NVIDIA's driver-level frame generation solution. Researching and improving frame interpolation algorithms and optical flow accelerator algorithms.
+                      Core contributor to NVIDIA's next-generation frame generation technology. Part of the research team for DLSS 4's Multi Frame Generation, enabling significant performance improvements and visual fidelity in real-time graphics.
                     </p>
-                    <Link href="/projects/nvidia-smooth-motion" className="text-aurora-light hover:text-aurora-lighter flex items-center text-sm sm:text-base">
-                      Learn more <FaArrowRight className="ml-1" />
+                    <Link href="https://research.nvidia.com/labs/adlr/DLSS4/" className="text-aurora-light hover:text-aurora-lighter flex items-center text-sm sm:text-base" target="_blank" rel="noopener noreferrer">
+                      View Research <FaArrowRight className="ml-1" />
                     </Link>
                   </div>
                 </div>
                 
-                {/* Project Card 2 */}
+                {/* Project Card 2 - NEW */}
+                <div className="card group hover:shadow-lg transition-all duration-300 bg-night-lighter bg-opacity-30 backdrop-blur-sm rounded-lg border border-aurora-darker border-opacity-30">
+                  <div className="h-2 aurora-gradient"></div>
+                  <div className="p-4 sm:p-6">
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">NVIDIA Smooth Motion</h3>
+                    <p className="text-xs sm:text-sm text-gray-300 mb-3 sm:mb-4 text-shadow-sm">
+                      Developed driver-based AI model that enhances gameplay by inferring additional frames between rendered frames, now available in the NVIDIA App. Works across DirectX 11 and 12 games without requiring DLSS integration.
+                    </p>
+                    <Link href="https://www.nvidia.com/en-us/geforce/news/nvidia-app-update-dlss-overrides-and-more/" className="text-aurora-light hover:text-aurora-lighter flex items-center text-sm sm:text-base" target="_blank" rel="noopener noreferrer">
+                      View Feature <FaArrowRight className="ml-1" />
+                    </Link>
+                  </div>
+                </div>
+                
+                {/* Project Card 3 */}
                 <div className="card group hover:shadow-lg transition-all duration-300 bg-night-lighter bg-opacity-30 backdrop-blur-sm rounded-lg border border-aurora-darker border-opacity-30">
                   <div className="h-2 aurora-gradient"></div>
                   <div className="p-4 sm:p-6">
@@ -153,17 +167,19 @@ export default function HomePage() {
                   </div>
                 </div>
                 
-                {/* Project Card 3 */}
-                <div className="card group hover:shadow-lg transition-all duration-300 bg-night-lighter bg-opacity-30 backdrop-blur-sm rounded-lg border border-aurora-darker border-opacity-30">
-                  <div className="h-2 aurora-gradient"></div>
-                  <div className="p-4 sm:p-6">
-                    <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">Video Quality Testing Platform</h3>
-                    <p className="text-xs sm:text-sm text-gray-300 mb-3 sm:mb-4 text-shadow-sm">
-                      Built comprehensive platforms for video subjective quality blind testing and encoder testing visualization to accelerate video algorithm development and verification.
-                    </p>
-                    <Link href="/projects/video-quality-testing" className="text-aurora-light hover:text-aurora-lighter flex items-center text-sm sm:text-base">
-                      Learn more <FaArrowRight className="ml-1" />
-                    </Link>
+                {/* Project Card 4 - Hidden but preserved in code */}
+                <div className="hidden">
+                  <div className="card group hover:shadow-lg transition-all duration-300 bg-night-lighter bg-opacity-30 backdrop-blur-sm rounded-lg border border-aurora-darker border-opacity-30">
+                    <div className="h-2 aurora-gradient"></div>
+                    <div className="p-4 sm:p-6">
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 group-hover:text-aurora-light transition-colors text-snow text-shadow-sm">Video Quality Testing Platform</h3>
+                      <p className="text-xs sm:text-sm text-gray-300 mb-3 sm:mb-4 text-shadow-sm">
+                        Built comprehensive platforms for video subjective quality blind testing and encoder testing visualization to accelerate video algorithm development and verification.
+                      </p>
+                      <Link href="/projects/video-quality-testing" className="text-aurora-light hover:text-aurora-lighter flex items-center text-sm sm:text-base">
+                        Learn more <FaArrowRight className="ml-1" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

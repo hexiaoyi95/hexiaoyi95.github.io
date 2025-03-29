@@ -2,6 +2,7 @@
 
 import { FaDownload, FaUser, FaGraduationCap, FaBriefcase, FaCode, FaNewspaper, FaTrophy } from 'react-icons/fa';
 import React from 'react';
+import publications from '@/data/publications';
 
 // Resume data for Xiaoyi He from CV
 const education = [
@@ -94,49 +95,12 @@ const projects = [
   {
     title: 'Deep Learning Based Video Compression',
     period: '2017 - 2018',
-    description: 'Proposed a novel CNN utilizing partition information in video encoder to enhance compressed videos (deblocking). Achieved about 10% bitrate saving on benchmark sequences. Paper accepted by ICIP 2019 (oral) and won 2nd prize in ChinaMM 2018 challenge.',
+    description: 'Proposed a novel CNN utilizing partition information in video encoder to enhance compressed videos (deblocking). Achieved about 10% bitrate saving on benchmark sequences. Paper accepted by ICIP 2019 (oral), IEEE Transactions on Multimedia 2020 and won 2nd prize in ChinaMM 2018 challenge.',
   },
   {
     title: 'Intelligent Surveillance',
     period: '2016 - 2017',
     description: 'Established a dataset for human fall detection. Developed a real-time deep learning based fall detection algorithm with over 80% accuracy. Won "Best Demo of the Year" award at Microsoft Research Asia Symposium in 2017.',
-  },
-];
-
-const publications = [
-  {
-    title: 'Enhancing HEVC Compressed Videos with a Partition-Masked Convolutional Neural Network',
-    venue: 'International Conference on Image Processing (ICIP)',
-    year: '2018',
-    authors: 'He, Xiaoyi, et al.',
-    note: 'Oral presentation, 33 citations',
-    link: 'https://arxiv.org/abs/1805.03894',
-  },
-  {
-    title: 'A Multimodal Lossless Coding Method for Skeletons in Videos',
-    venue: 'IEEE International Conference on Multimedia & Expo Workshop (ICME)',
-    year: '2019',
-    authors: 'He, Xiaoyi, et al.',
-  },
-  {
-    title: 'Partition-aware Adaptive Switching Networks for Post-processing in HEVC',
-    venue: 'IEEE Transactions on Multimedia',
-    year: '2020',
-    authors: 'Lin Weiyao, He Xiaoyi, et al.',
-    link: 'https://arxiv.org/abs/1912.11604',
-    code: 'https://github.com/hexiaoyi95/Partition-aware',
-  },
-  {
-    title: 'Key-point Sequence Lossless Compression for Intelligent Video Analysis',
-    venue: 'IEEE MultiMedia',
-    year: '2020',
-    authors: 'Lin Weiyao, He Xiaoyi, et al.',
-  },
-  {
-    title: 'Deep Residual Network Based HEVC Compressed Videos Enhancement',
-    venue: 'Computer Science',
-    year: '2019',
-    authors: 'He Xiao-yi, et al.',
   },
 ];
 
@@ -156,6 +120,9 @@ const skills = {
 };
 
 export default function ResumePage() {
+  // Sort publications by citation count (highest first)
+  const sortedPublications = [...publications].sort((a, b) => (b.citations || 0) - (a.citations || 0));
+  
   return (
     <div className="container mx-auto py-8 px-4 sm:py-12">
       <div className="max-w-4xl mx-auto">
@@ -253,12 +220,13 @@ export default function ResumePage() {
             <FaNewspaper className="mr-2 text-aurora" /> Publications
           </h2>
           <div className="space-y-3 sm:space-y-4">
-            {publications.map((pub, index) => (
+            {sortedPublications.map((pub, index) => (
               <div key={index} className="bg-white dark:bg-night-lighter p-3 sm:p-4 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold mb-1">{pub.title}</h3>
                 <p className="text-aurora dark:text-aurora-light">{pub.authors}</p>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
                   {pub.venue}, {pub.year} {pub.note && <span className="font-medium text-aurora-dark dark:text-aurora-light">({pub.note})</span>}
+                  {pub.citations !== undefined && <span className="ml-2 text-aurora-dark">• {pub.citations} citation{pub.citations !== 1 ? 's' : ''}</span>}
                 </p>
                 <div className="mt-1 space-x-3">
                   {pub.link && (
@@ -269,6 +237,11 @@ export default function ResumePage() {
                   {pub.code && (
                     <a href={pub.code} target="_blank" rel="noopener noreferrer" className="text-sm text-aurora hover:text-aurora-dark">
                       [Code]
+                    </a>
+                  )}
+                  {pub.project && (
+                    <a href={pub.project} target="_blank" rel="noopener noreferrer" className="text-sm text-aurora hover:text-aurora-dark">
+                      [Project Page]
                     </a>
                   )}
                 </div>

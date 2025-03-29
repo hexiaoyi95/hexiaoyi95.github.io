@@ -71,7 +71,7 @@ export default function ContactPage() {
                 </div>
                 <div className="ml-3">
                   <h3 className="text-lg font-medium">Email</h3>
-                  <p className="text-gray-600 dark:text-gray-400">xiaoyi.he@example.com</p>
+                  <p className="text-gray-600 dark:text-gray-400">xiaoyi.he@outlook.com</p>
                 </div>
               </div>
 
@@ -106,7 +106,7 @@ export default function ContactPage() {
                   <FaLinkedin className="h-6 w-6" />
                 </a>
                 <a 
-                  href="mailto:xiaoyi.he@example.com" 
+                  href="mailto:xiaoyi.he@outlook.com" 
                   className="text-gray-700 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
                 >
                   <FaEnvelope className="h-6 w-6" />
