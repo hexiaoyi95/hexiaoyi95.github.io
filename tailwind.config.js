@@ -85,7 +85,82 @@ module.exports = {
       backgroundImage: {
         'aurora-hero': "url('/images/northern-lights.jpg')",
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.gray.900'),
+            a: {
+              color: theme('colors.aurora.DEFAULT'),
+              '&:hover': {
+                color: theme('colors.aurora.dark'),
+              },
+            },
+            h1: {
+              color: theme('colors.gray.900'),
+              fontFamily: theme('fontFamily.serif').join(', '),
+            },
+            h2: {
+              color: theme('colors.gray.900'),
+              fontFamily: theme('fontFamily.serif').join(', '),
+            },
+            h3: {
+              color: theme('colors.gray.900'),
+              fontFamily: theme('fontFamily.serif').join(', '),
+            },
+            h4: {
+              color: theme('colors.gray.900'),
+              fontFamily: theme('fontFamily.serif').join(', '),
+            },
+            code: {
+              color: theme('colors.gray.900'),
+              backgroundColor: theme('colors.gray.100'),
+              padding: '0.2em 0.4em',
+              borderRadius: '0.25rem',
+              fontWeight: '400',
+            },
+            pre: {
+              backgroundColor: theme('colors.gray.800'),
+              color: theme('colors.gray.300'),
+              overflowX: 'auto',
+              fontSize: '0.875em',
+            },
+          },
+        },
+        dark: {
+          css: {
+            color: theme('colors.gray.300'),
+            a: {
+              color: theme('colors.aurora.light'),
+              '&:hover': {
+                color: theme('colors.aurora.lighter'),
+              },
+            },
+            h1: {
+              color: theme('colors.gray.100'),
+            },
+            h2: {
+              color: theme('colors.gray.100'),
+            },
+            h3: {
+              color: theme('colors.gray.100'),
+            },
+            h4: {
+              color: theme('colors.gray.100'),
+            },
+            code: {
+              color: theme('colors.gray.100'),
+              backgroundColor: theme('colors.gray.800'),
+            },
+            blockquote: {
+              color: theme('colors.gray.300'),
+              borderLeftColor: theme('colors.gray.700'),
+            },
+          },
+        },
+      }),
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 } 

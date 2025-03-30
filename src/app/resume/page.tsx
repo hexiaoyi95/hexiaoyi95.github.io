@@ -23,7 +23,20 @@ const education = [
   },
 ];
 
-const experience = [
+// Let's add the proper TypeScript interface
+interface ExperienceItem {
+  position: string;
+  company: string;
+  location: string;
+  period: string;
+  description: {
+    text: string;
+    subItems: string[];
+  }[];
+}
+
+// Use the interface for the experience array
+const experience: ExperienceItem[] = [
   {
     position: 'Senior Video Architect',
     company: 'Nvidia',
@@ -32,6 +45,7 @@ const experience = [
     description: [
       {
         text: 'DLSS frame generation research. Core contributor of Nvidia Smooth Motion',
+        subItems: []
         // subItems: [
         //   'Researched and implemented first driver-level frame generation model with shippable quality ',
         //   'Continously contributed to quality improvement and performance optimization',
@@ -40,12 +54,15 @@ const experience = [
       
       {
         text: 'Video frame generation research',
+        subItems: []
       },
       {
         text: 'Efficient frame generation for autonomous driving with Nvidia OFA hardware',
+        subItems: []
       },
       {
         text: 'Optical flow acceletor algorithm research and improvement',
+        subItems: []
         // subItems: [
         //   'Efficient e2e optical flow estimation network design and implementation',
         //   'Hybrid optical flow estimation method design and implementation: learnable matching cost, confidence prediction',

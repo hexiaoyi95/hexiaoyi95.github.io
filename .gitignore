@@ -9,8 +9,8 @@
 
 # next.js
 /.next/
-# Allow out directory for GitHub Pages deployment
-# /out/
+# Exclude out directory (build output)
+/out/
 
 # production
 /build
