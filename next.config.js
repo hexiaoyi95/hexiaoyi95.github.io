@@ -5,8 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/personal_website' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/personal_website' : '',
+  basePath: '',
+  assetPrefix: '',
   trailingSlash: true,
   webpack: (config, { isServer }) => {
     if (!isServer) {
