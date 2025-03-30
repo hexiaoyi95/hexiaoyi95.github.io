@@ -1,4 +1,4 @@
-# Personal Website for Xiaoyi He
+# Personal Website for Shawn He
 
 This is a personal website built with Next.js, TypeScript, and Tailwind CSS. It serves as a platform to showcase professional information, projects, publications, and blog posts.
 

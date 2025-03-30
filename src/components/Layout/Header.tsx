@@ -28,7 +28,7 @@ export default function Header() {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/">
-                <span className="text-xl font-bold text-aurora dark:text-aurora-light">Xiaoyi He</span>
+                <span className="text-xl font-bold text-aurora dark:text-aurora-light">Shawn He</span>
               </Link>
             </div>
           </div>

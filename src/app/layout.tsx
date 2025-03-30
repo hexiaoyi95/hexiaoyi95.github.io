@@ -5,8 +5,8 @@ import Layout from '@/components/Layout/Layout';
 // Using system fonts as fallbacks
 
 export const metadata = {
-  title: 'Xiaoyi He - Personal Website',
-  description: 'Personal website for Xiaoyi He, featuring resume, publications, projects, and blog posts.',
+  title: 'Shawn He - Personal Website',
+  description: 'Personal website for Shawn He, featuring resume, publications, projects, and blog posts.',
 };
 
 export default function RootLayout({

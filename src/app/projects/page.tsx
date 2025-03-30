@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
-// Projects data for Xiaoyi He from resume
+// Projects data for Shawn He from resume
 const projects = [
   {
     id: 'nvidia-smooth-motion',

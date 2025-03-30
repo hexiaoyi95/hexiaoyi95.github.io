@@ -5,7 +5,7 @@ import React, { useRef } from 'react';
 import publications from '@/data/publications';
 import { generatePDF } from '@/utils/pdfGenerator';
 
-// Resume data for Xiaoyi He from CV
+// Resume data for Shawn He from CV
 const education = [
   {
     degree: 'Master of Engineering',

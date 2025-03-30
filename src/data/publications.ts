@@ -1,4 +1,4 @@
-// Publications data for Xiaoyi He
+// Publications data for Shawn He
 const publications = [
   {
     title: 'Enhancing HEVC Compressed Videos with a Partition-Masked Convolutional Neural Network',

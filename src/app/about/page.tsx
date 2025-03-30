@@ -18,7 +18,7 @@ export default function AboutPage() {
             {/* Uncomment when you have an actual image
             <Image
               src="/images/about-profile.jpg"
-              alt="Xiaoyi He"
+              alt="Shawn He"
               fill
               className="rounded-lg object-cover"
             />
@@ -28,7 +28,7 @@ export default function AboutPage() {
           <div className="card p-6">
             <h2 className="text-xl font-bold mb-4">Quick Info</h2>
             <ul className="space-y-2">
-              <li><strong>Name:</strong> Xiaoyi He / 何晓艺</li>
+              <li><strong>Name:</strong> Shawn He / 何晓艺</li>
               <li><strong>Location:</strong> Shanghai, China</li>
               <li><strong>Email:</strong> xiaoyi.he@outlook.com</li>
               <li><strong>Languages:</strong> Chinese (Native), English (Fluent)</li>

@@ -25,7 +25,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0 text-center md:text-left">
             <p className="text-sm text-gray-400">
-              &copy; {new Date().getFullYear()} Xiaoyi He. All Rights Reserved.
+              &copy; {new Date().getFullYear()} Shawn He. All Rights Reserved.
             </p>
             <p className="text-xs text-gray-500 mt-1">
               Generated with ❤️ using <a href="https://cursor.sh" target="_blank" rel="noopener noreferrer" className="text-aurora-light hover:text-aurora-lighter transition-colors">Cursor</a> - The AI-first code editor
