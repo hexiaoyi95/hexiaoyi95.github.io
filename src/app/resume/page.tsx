@@ -1,6 +1,6 @@
 'use client';
 
-import { FaDownload, FaUser, FaGraduationCap, FaBriefcase, FaCode, FaNewspaper, FaTrophy } from 'react-icons/fa';
+import { FaDownload, FaUser, FaGraduationCap, FaBriefcase, FaCode, FaNewspaper, FaTrophy, FaCertificate } from 'react-icons/fa';
 import React, { useRef } from 'react';
 import publications from '@/data/publications';
 import { generatePDF } from '@/utils/pdfGenerator';
@@ -204,7 +204,14 @@ const skills = {
 
 export default function ResumePage() {
   // Sort publications by citation count (highest first)
-  const sortedPublications = [...publications].sort((a, b) => (b.citations || 0) - (a.citations || 0));
+  const sortedPublications = [...publications]
+    .filter(item => item.type === 'publication')
+    .sort((a, b) => (b.citations || 0) - (a.citations || 0));
+  
+  // Get patents sorted by year (newest first)
+  const patents = [...publications]
+    .filter(item => item.type === 'patent')
+    .sort((a, b) => parseInt(b.year) - parseInt(a.year));
   
   // Reference to the resume content container
   const resumeRef = useRef<HTMLDivElement>(null);
@@ -375,12 +382,14 @@ export default function ResumePage() {
                 </div>
                 <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
                   {exp.description.map((item, idx) => (
-                    <li key={idx} className="mb-1">
-                      <div className="inline">{item.text}</div>
+                    <li key={idx} className="mb-1 pdf-list-item">
+                      <span className="pdf-main-point">{item.text}</span>
                       {item.subItems && item.subItems.length > 0 && (
-                        <ul className="list-circle list-inside ml-6 mt-1 space-y-1 text-sm text-gray-600 dark:text-gray-400">
+                        <ul className="pdf-sub-list ml-6 mt-1 space-y-1 text-sm text-gray-600 dark:text-gray-400">
                           {item.subItems.map((subItem, subIdx) => (
-                            <li key={subIdx}>{subItem}</li>
+                            <li key={subIdx} className="pdf-sub-item ml-2">
+                              <span>• {subItem}</span>
+                            </li>
                           ))}
                         </ul>
                       )}
@@ -445,6 +454,53 @@ export default function ResumePage() {
             ))}
           </div>
         </section>
+
+        {/* Patents Section */}
+        {patents.length > 0 && (
+          <section className="mb-8 sm:mb-12">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 pb-2 border-b border-aurora flex items-center">
+              <FaCertificate className="mr-2 text-aurora" /> Patents
+            </h2>
+            <div className="grid grid-cols-1 gap-2">
+              {patents.map((patent, index) => (
+                <div key={index} className="bg-white dark:bg-night-lighter p-3 rounded-lg pdf-list-item">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <h3 className="text-base font-semibold">{patent.title}</h3>
+                      <p className="text-sm text-aurora dark:text-aurora-light">{patent.authors}</p>
+                    </div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400 mt-1 sm:mt-0 sm:text-right">
+                      <div className="flex items-center gap-2">
+                        <span>{patent.patentNumber}</span>
+                        {patent.status && (
+                          <span className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 rounded-full text-xs font-medium">
+                            {patent.status}
+                          </span>
+                        )}
+                      </div>
+                      <span>{patent.year}</span>
+                    </div>
+                  </div>
+                  {patent.links && patent.links.length > 0 && (
+                    <div className="mt-1 space-x-2">
+                      {patent.links.map((link, idx) => (
+                        <a 
+                          key={idx}
+                          href={link.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-xs text-aurora hover:text-aurora-dark"
+                        >
+                          [{link.label}]
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Skills Section */}
         <section className="mb-8 sm:mb-12">

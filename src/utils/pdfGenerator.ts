@@ -41,6 +41,34 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
     clone.classList.add('light');
     clone.classList.remove('dark');
     
+    // Add global styles for PDF generation
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+      .pdf-list-item {
+        margin-bottom: 6px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .pdf-main-point {
+        display: inline-block;
+        margin-bottom: 2px !important;
+      }
+      .pdf-sub-list {
+        margin-top: 3px !important;
+        margin-left: 15px !important;
+        padding-bottom: 4px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+      .pdf-sub-item {
+        margin-bottom: 2px !important;
+        line-height: 1.3 !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+    `;
+    clone.appendChild(styleElement);
+    
     // Apply styles for better PDF output and more compact layout
     const elementsToFix = clone.querySelectorAll('*');
     elementsToFix.forEach(el => {
@@ -52,6 +80,20 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
           // Set text color to dark
           el.style.color = '#333';
           
+          // Fix list items
+          if (el.tagName === 'LI') {
+            el.style.pageBreakInside = 'avoid';
+            el.style.breakInside = 'avoid';
+            
+            // Ensure proper margin for list items
+            if (el.classList.contains('pdf-sub-item')) {
+              el.style.marginBottom = '2px';
+              el.style.lineHeight = '1.3';
+            } else {
+              el.style.marginBottom = '4px';
+            }
+          }
+          
           // Increase line height slightly to prevent text cutting
           if (el.style.lineHeight) {
             const currentLineHeight = parseFloat(el.style.lineHeight);
@@ -61,7 +103,7 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
           }
           
           // Reduce margins and padding to make layout more compact
-          if (el.tagName === 'P' || el.tagName === 'LI' || el.tagName === 'H3' || el.tagName === 'H2' || el.tagName === 'DIV') {
+          if (el.tagName === 'P' || el.tagName === 'H3' || el.tagName === 'H2' || el.tagName === 'DIV') {
             el.style.marginBottom = '3px';
             el.style.marginTop = '3px';
             if (el.style.paddingBottom) {
@@ -78,25 +120,13 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
             }
           }
           
-          // Style sub-bullets properly
-          if (el.classList.contains('list-circle')) {
-            el.style.marginLeft = '12px';
-            el.style.marginTop = '2px';
-            el.style.marginBottom = '2px';
-          }
-          
-          // Style sub-bullets list items
-          if (el.tagName === 'LI' && el.parentElement?.classList.contains('list-circle')) {
-            el.style.fontSize = '0.9em';
-            el.style.color = '#444';
-            el.style.marginBottom = '1px';
-            el.style.marginTop = '1px';
-          }
-          
           // Make sections more compact
           if (el.tagName === 'SECTION') {
             el.style.marginBottom = '4px';
             el.style.paddingBottom = '2px';
+            // Avoid section breaks if possible
+            el.style.pageBreakInside = 'avoid';
+            el.style.breakInside = 'avoid';
           }
           
           // Fix hover states
@@ -108,6 +138,18 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
         }
       }
     });
+    
+    // Configure patents section for better rendering
+    const patentsSection = clone.querySelector('section:has(.grid.grid-cols-1.gap-2)');
+    if (patentsSection) {
+      const patentItems = patentsSection.querySelectorAll('.grid.grid-cols-1.gap-2 > div');
+      patentItems.forEach(item => {
+        if (item instanceof HTMLElement) {
+          item.style.pageBreakInside = 'avoid';
+          item.style.breakInside = 'avoid';
+        }
+      });
+    }
     
     // Create a temporary container for our clone with better styling for PDF output
     const container = document.createElement('div');
@@ -122,6 +164,7 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
     // Wait a moment for fonts to load and styles to apply
     await new Promise(resolve => setTimeout(resolve, 500));
     
+    // Improved section-by-section rendering approach
     // Get all elements to render (header + sections)
     const headerElement = clone.querySelector('.flex.flex-col.sm\\:flex-row') as HTMLElement;
     const resumeSections = Array.from(clone.querySelectorAll('section'));
@@ -129,7 +172,7 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
     
     // Rendering configuration
     const padding = 10; // mm
-    const sectionSpacing = 2; // mm - further reduced for compact layout
+    const sectionSpacing = 4; // mm - slightly increased for better separation
     let currentY = padding;
     let pageNum = 1;
     
@@ -140,6 +183,9 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
       const element = allElements[i];
       console.log(`Processing element ${i+1}/${allElements.length}: ${element.tagName}${element.className ? ' with classes ' + element.className : ''}`);
       
+      // Special handling for sections with sub-lists
+      const hasSubItems = element.querySelectorAll('.pdf-sub-item').length > 0;
+      
       // Render the element to canvas
       const canvas = await html2canvas(element, {
         scale: 2.5,
@@ -147,8 +193,8 @@ export const generatePDF = async (element: HTMLElement, filename: string = 'resu
         logging: false,
         backgroundColor: '#ffffff',
         allowTaint: true,
-        // Add minimal extra height
-        height: element.offsetHeight + 5
+        // Add extra height for sections with sub-items
+        height: element.offsetHeight + (hasSubItems ? 20 : 5)
       });
       
       const imgData = canvas.toDataURL('image/png');
