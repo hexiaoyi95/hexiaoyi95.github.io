@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <rss version="2.0">
+      <channel>
+        <title>Shawn He - Technical Notes</title>
+        <link>https://example.com/blog/</link>
+        <description>I build AI video systems for frame generation, optical flow, and compression at real-time graphics scale.</description>
+        <language>en</language>
+        
+        <item>
+          <title>Building a Personal Website with Next.js and GitHub Pages Using Cursor AI</title>
+          <link>https://example.com/blog/building-personal-website-nextjs-github-pages/</link>
+          <guid>https://example.com/blog/building-personal-website-nextjs-github-pages/</guid>
+          <pubDate>Sat, 29 Mar 2025 16:00:00 GMT</pubDate>
+          <description>A behind-the-scenes look at how I created my entire personal website with the assistance of Cursor AI, from initial setup to deployment on GitHub Pages.</description>
+        </item>
+        <item>
+          <title>Understanding PyTorch Tensor Assignment Behavior: A Subtle Gotcha</title>
+          <link>https://example.com/blog/understanding-pytorch-tensor-assignment-behavior/</link>
+          <guid>https://example.com/blog/understanding-pytorch-tensor-assignment-behavior/</guid>
+          <pubDate>Sat, 29 Mar 2025 16:00:00 GMT</pubDate>
+          <description>Exploring the unexpected behavior when swapping PyTorch tensor slices and understanding the underlying mechanisms.</description>
+        </item>
+      </channel>
+    </rss>
