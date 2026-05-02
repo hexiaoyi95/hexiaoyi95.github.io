@@ -634,8 +634,19 @@
     color: #070910 !important;
   }
 
-  .race-surface .poster-button-dark {
+  .race-surface :is(.btn:not(.btn-secondary), .poster-button-dark, .nav-link-active, .tag-chip-active),
+  .race-surface :is(.btn:not(.btn-secondary), .poster-button-dark, .nav-link-active, .tag-chip-active) :is(.text-white, .text-slate-100, .text-slate-200, svg) {
     color: #ffffff !important;
+  }
+
+  .race-surface .btn-secondary,
+  .race-surface .btn-secondary :is(.text-white, .text-slate-100, .text-slate-200, svg) {
+    color: #070910 !important;
+  }
+
+  .race-surface .blog-prose pre,
+  .race-surface .blog-prose pre :is(.text-white, .text-slate-100, .text-slate-200, code, span) {
+    color: #f8fafc !important;
   }
 
   .race-surface :is(.text-slate-300, .text-slate-400, .text-slate-500, .text-gray-600, .text-gray-700) {
