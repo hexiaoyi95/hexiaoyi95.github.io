@@ -5,9 +5,9 @@ import { getAllBlogTags, getPostsByTagSlug, getTagBySlug } from '@/utils/blog';
 import { siteConfig } from '@/config/site';
 
 interface BlogTagPageProps {
-  params: {
+  params: Promise<{
     tag: string;
-  };
+  }>;
 }
 
 export function generateStaticParams() {
@@ -16,8 +16,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: BlogTagPageProps): Metadata {
-  const tag = getTagBySlug(params.tag);
+export async function generateMetadata({ params }: BlogTagPageProps): Promise<Metadata> {
+  const { tag: tagSlug } = await params;
+  const tag = getTagBySlug(tagSlug);
 
   if (!tag) {
     return {
@@ -31,8 +32,9 @@ export function generateMetadata({ params }: BlogTagPageProps): Metadata {
   };
 }
 
-export default function BlogTagPage({ params }: BlogTagPageProps) {
-  const tag = getTagBySlug(params.tag);
+export default async function BlogTagPage({ params }: BlogTagPageProps) {
+  const { tag: tagSlug } = await params;
+  const tag = getTagBySlug(tagSlug);
 
   if (!tag) {
     notFound();
@@ -40,9 +42,9 @@ export default function BlogTagPage({ params }: BlogTagPageProps) {
 
   return (
     <BlogIndexClient
-      posts={getPostsByTagSlug(params.tag)}
+      posts={getPostsByTagSlug(tagSlug)}
       tags={getAllBlogTags()}
-      initialTagSlug={params.tag}
+      initialTagSlug={tagSlug}
       title={`${tag.name} Notes`}
       description={`A filtered route for posts tagged ${tag.name}. This page is statically generated for GitLab Pages.`}
     />

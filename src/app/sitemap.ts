@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { routes } from '@/config/routes';
 import { getAllBlogPostSummaries, getAllBlogTags } from '@/utils/blog';
 
+export const dynamic = 'force-static';
+
 function getBaseUrl(): string {
   return process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://example.com';
 }
