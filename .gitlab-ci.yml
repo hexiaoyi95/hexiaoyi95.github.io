@@ -1,0 +1,29 @@
+image: node:22
+
+stages:
+  - build
+  - deploy
+
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - .npm/
+
+pages:
+  stage: deploy
+  variables:
+    GITLAB_PAGES: 'true'
+  script:
+    - if [ -z "${NEXT_PUBLIC_BASE_PATH+x}" ]; then if [ "${CI_PROJECT_NAME}" = "${CI_PROJECT_NAMESPACE}.gitlab.io" ]; then export NEXT_PUBLIC_BASE_PATH=""; else export NEXT_PUBLIC_BASE_PATH="/${CI_PROJECT_NAME}"; fi; fi
+    - if [ -z "${NEXT_PUBLIC_SITE_URL+x}" ]; then export NEXT_PUBLIC_SITE_URL="${CI_PAGES_URL}"; fi
+    - npm ci --cache .npm --prefer-offline
+    - npm run build
+    - rm -rf public
+    - mv out public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

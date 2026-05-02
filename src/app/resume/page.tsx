@@ -196,7 +196,7 @@ const skills = {
   achievements: [
     'One paper about frame generation is accepted by NVIDIA internal conference (NTech 2024, 200/900+ submissions)',
     'Second prize in "Deep-learning based Post Processing for Compressed Images" challenge (ChinaMM 2018)',
-    <a href="https://www.microsoft.com/en-us/research/blog/visual-intelligence-smart-home-security/" target="_blank" rel="noopener noreferrer" className="text-aurora hover:text-aurora-dark">Best Demo of The Year Award at Microsoft Research Asia Symposium</a>,
+    <a key="msra-best-demo" href="https://www.microsoft.com/en-us/research/blog/visual-intelligence-smart-home-security/" target="_blank" rel="noopener noreferrer" className="text-aurora hover:text-aurora-dark">Best Demo of The Year Award at Microsoft Research Asia Symposium</a>,
     'Merit Student of Shanghai Jiao Tong University',
     'National Encouragement Scholarship',
   ],
@@ -287,7 +287,7 @@ export default function ResumePage() {
   
   return (
     <div className="container mx-auto py-8 px-4 sm:py-12">
-      <div className="max-w-4xl mx-auto" ref={resumeRef}>
+      <div className="track-card mx-auto max-w-5xl p-5 sm:p-8" ref={resumeRef}>
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start mb-6 sm:mb-8">
           <div>

@@ -3,77 +3,705 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: light;
+    --garage-paper: #fffaf0;
+    --garage-cream: #f6eddd;
+    --garage-warm: #efe1cc;
+    --garage-ink: #070910;
+    --garage-red: #e9412f;
+    --garage-blue: #2468ff;
+    --garage-amber: #f3b84b;
+    --garage-teal: #12b88d;
+    --garage-shadow: rgba(7, 9, 16, 0.2);
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     touch-action: manipulation;
   }
-  
+
   body {
-    @apply bg-gray-50 text-gray-900 dark:bg-night dark:text-snow overflow-x-hidden;
+    @apply overflow-x-hidden text-racer-asphalt antialiased;
+    background:
+      radial-gradient(circle at 13% 8%, rgba(233, 65, 47, 0.1), transparent 24rem),
+      radial-gradient(circle at 86% 4%, rgba(36, 104, 255, 0.1), transparent 25rem),
+      linear-gradient(180deg, var(--garage-paper) 0%, var(--garage-cream) 52%, #fff8ea 100%);
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
   }
 
-  /* Improve input fields on mobile */
-  input, select, textarea, button {
+  input,
+  select,
+  textarea,
+  button {
     @apply text-base;
-    font-size: 16px; /* Prevents zoom on focus in iOS */
+    font-size: 16px;
+  }
+
+  ::selection {
+    background: rgba(24, 242, 178, 0.28);
+    color: #ffffff;
   }
 }
 
 @layer components {
   .container {
-    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
-  
+
+  .race-surface {
+    position: relative;
+    overflow: hidden;
+    background:
+      linear-gradient(90deg, rgba(7, 9, 16, 0.035) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(7, 9, 16, 0.03) 1px, transparent 1px),
+      radial-gradient(circle at 8% 12%, rgba(233, 65, 47, 0.11), transparent 26rem),
+      radial-gradient(circle at 92% 6%, rgba(36, 104, 255, 0.11), transparent 26rem),
+      linear-gradient(180deg, var(--garage-paper) 0%, var(--garage-cream) 100%);
+    background-size: 44px 44px, 44px 44px, auto;
+  }
+
+  .race-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(110deg, transparent 0 18%, rgba(7, 9, 16, 0.035) 18% 18.35%, transparent 18.35% 34%),
+      repeating-linear-gradient(90deg, transparent 0 72px, rgba(233, 65, 47, 0.045) 72px 74px, transparent 74px 146px);
+    mask-image: linear-gradient(180deg, #000 0%, transparent 74%);
+  }
+
+  .track-card {
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #070910;
+    border-radius: 1.75rem;
+    background:
+      radial-gradient(circle at 18% 8%, rgba(255, 255, 255, 0.92), transparent 12rem),
+      repeating-linear-gradient(
+        -12deg,
+        rgba(243, 184, 75, 0.07) 0 11px,
+        transparent 11px 24px
+      ),
+      var(--garage-paper);
+    color: #070910;
+    box-shadow: 10px 10px 0 var(--garage-shadow);
+    backdrop-filter: none;
+  }
+
+  .track-card:hover {
+    border-color: #070910;
+    box-shadow: 12px 12px 0 rgba(7, 9, 16, 0.32);
+  }
+
+  .side-mini-cars {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: none;
+    pointer-events: none;
+  }
+
+  @media (min-width: 1280px) {
+    .side-mini-cars {
+      display: block;
+    }
+  }
+
+  .side-car {
+    position: absolute;
+    top: -22rem;
+    width: 7.2rem;
+    height: 12.8rem;
+    opacity: 0.42;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(7px 9px 0 rgba(7, 9, 16, 0.14));
+    animation: side-car-run 13s linear infinite;
+  }
+
+  .side-car-left {
+    left: max(0.65rem, calc((100vw - 82rem) / 2 - 6.8rem));
+  }
+
+  .side-car-right {
+    right: max(0.65rem, calc((100vw - 82rem) / 2 - 6.8rem));
+    animation-delay: -6.5s;
+  }
+
+  .side-car-red {
+    background-image: url('/images/theme/mini4wd-red.webp');
+  }
+
+  .side-car-blue {
+    background-image: url('/images/theme/mini4wd-blue.webp');
+  }
+
+  .poster-hero-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .poster-hero-grid > *,
+  .machine-card,
+  .race-ticket {
+    min-width: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .poster-hero-grid {
+      grid-template-columns: minmax(0, 1fr) 23rem;
+      align-items: end;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .poster-hero-grid {
+      grid-template-columns: minmax(0, 1fr) 24rem;
+      align-items: end;
+    }
+  }
+
+  .identity-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 100%;
+    min-width: 0;
+    border: 3px solid #070910;
+    border-radius: 1.75rem;
+    background:
+      repeating-linear-gradient(
+        -12deg,
+        rgba(243, 184, 75, 0.1) 0 10px,
+        transparent 10px 22px
+      ),
+      rgba(255, 255, 255, 0.92);
+    padding: 1rem;
+    box-shadow: 10px 10px 0 rgba(7, 9, 16, 0.16);
+  }
+
+  .identity-strip > * {
+    min-width: 0;
+  }
+
+  .identity-strip h1 {
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 640px) {
+    .identity-strip {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  .poster-button {
+    @apply inline-flex items-center gap-2 rounded-full border-2 border-racer-asphalt px-4 py-2 text-xs font-black uppercase tracking-[0.16em] shadow-[4px_4px_0_rgba(7,9,16,0.24)] transition hover:-translate-y-0.5;
+  }
+
+  .poster-button-dark {
+    @apply bg-racer-asphalt text-white;
+  }
+
+  .poster-icon {
+    @apply grid h-11 w-11 place-items-center rounded-full border-2 border-racer-asphalt bg-white text-racer-asphalt shadow-[4px_4px_0_rgba(7,9,16,0.2)] transition hover:-translate-y-0.5 hover:bg-racer-yellow;
+  }
+
+  .race-ticket {
+    position: relative;
+    border: 3px solid #070910;
+    border-radius: 1.75rem;
+    background:
+      linear-gradient(90deg, transparent 0 calc(100% - 1.15rem), rgba(7, 9, 16, 0.055) calc(100% - 1.15rem)),
+      rgba(255, 255, 255, 0.94);
+    padding: 1.5rem;
+    box-shadow: 8px 8px 0 rgba(7, 9, 16, 0.18);
+  }
+
+  .race-ticket::before,
+  .race-ticket::after {
+    content: '';
+    position: absolute;
+    right: 0.72rem;
+    width: 1rem;
+    height: 1rem;
+    border: 3px solid #070910;
+    border-radius: 999px;
+    background: var(--garage-paper);
+  }
+
+  .race-ticket::before {
+    top: 1rem;
+  }
+
+  .race-ticket::after {
+    bottom: 1rem;
+  }
+
+  .eyebrow {
+    @apply text-xs font-black uppercase tracking-[0.28em] text-racer-flare;
+  }
+
   .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-aurora hover:bg-aurora-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-aurora min-h-[44px] min-w-[44px];
+    @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded-full border-2 border-racer-asphalt bg-racer-asphalt px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-white shadow-[5px_5px_0_rgba(7,9,16,0.18)] transition hover:-translate-y-0.5 hover:bg-racer-flare focus:outline-none focus:ring-2 focus:ring-racer-flare focus:ring-offset-2 focus:ring-offset-[#fffaf0];
   }
-  
+
   .btn-secondary {
-    @apply bg-secondary-600 hover:bg-secondary-700 focus:ring-secondary-500;
+    @apply border-racer-asphalt bg-white text-racer-asphalt shadow-[5px_5px_0_rgba(7,9,16,0.18)] hover:bg-racer-yellow;
   }
-  
+
   .card {
-    @apply bg-white dark:bg-night-lighter overflow-hidden shadow rounded-lg border border-gray-200 dark:border-night-light;
+    @apply overflow-hidden rounded-[1.5rem] border-[3px] border-racer-asphalt bg-white text-racer-asphalt shadow-[10px_10px_0_rgba(7,9,16,0.24)];
+    background:
+      radial-gradient(circle at 18% 8%, rgba(255, 255, 255, 0.92), transparent 12rem),
+      repeating-linear-gradient(
+        -12deg,
+        rgba(243, 184, 75, 0.07) 0 11px,
+        transparent 11px 24px
+      ),
+      var(--garage-paper) !important;
   }
-  
+
   .nav-link {
-    @apply px-3 py-2 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-aurora dark:hover:text-aurora-light;
+    @apply rounded-full px-3 py-2 text-sm font-bold text-slate-400 transition hover:bg-white/10 hover:text-white;
   }
-  
+
   .nav-link-active {
-    @apply text-aurora dark:text-aurora-light;
+    @apply rounded-full bg-racer-asphalt px-3 py-2 text-sm font-bold text-white;
   }
 
   .aurora-gradient {
-    @apply bg-gradient-to-r from-aurora-dark via-aurora to-aurora-light;
+    @apply bg-gradient-to-r from-racer-blue via-racer-neon to-racer-yellow;
   }
-  
-  /* Resume list styling */
-  .list-circle {
-    list-style-type: circle;
+
+  .tag-chip {
+    @apply inline-flex items-center gap-2 rounded-full border-2 border-racer-asphalt bg-white px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-racer-asphalt shadow-[3px_3px_0_rgba(7,9,16,0.18)] transition hover:-translate-y-0.5 hover:bg-racer-yellow;
+  }
+
+  .tag-chip span {
+    @apply rounded-full bg-racer-asphalt px-1.5 py-0.5 text-[10px] text-racer-yellow;
+  }
+
+  .tag-chip-active {
+    @apply border-racer-asphalt bg-racer-asphalt text-white hover:text-white;
+  }
+
+  .tag-chip-active span {
+    @apply bg-white/15 text-white;
+  }
+
+  .tech-plate {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 24% 22%, rgba(24, 242, 178, 0.18), transparent 11rem),
+      radial-gradient(circle at 76% 68%, rgba(72, 166, 255, 0.16), transparent 12rem),
+      linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(7, 9, 16, 0.98));
+  }
+
+  .tech-plate::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(circle at 50% 50%, #000, transparent 74%);
+  }
+
+  .tech-plate::after {
+    content: '';
+    position: absolute;
+    left: 14%;
+    right: 14%;
+    top: 50%;
+    height: 0.7rem;
+    border-radius: 999px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(24, 242, 178, 0.88) 0 1rem,
+        transparent 1rem 1.7rem
+      ),
+      linear-gradient(90deg, rgba(255, 77, 46, 0.84), rgba(72, 166, 255, 0.84));
+    box-shadow: 0 0 40px rgba(24, 242, 178, 0.28);
+    transform: translateY(-50%);
+  }
+
+  .work-projects-stage {
+    position: relative;
+    overflow: hidden;
+    max-width: 100%;
+    border-radius: 2.25rem;
+    border: 3px solid #070910;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(233, 65, 47, 0.12), transparent 18rem),
+      radial-gradient(circle at 88% 4%, rgba(36, 104, 255, 0.12), transparent 18rem),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, var(--garage-paper) 100%);
+    box-shadow: 14px 14px 0 rgba(7, 9, 16, 0.28);
+  }
+
+  .work-projects-stage::before {
+    content: 'PORTFOLIO';
+    position: absolute;
+    right: 1.25rem;
+    top: 1.25rem;
+    z-index: 2;
+    rotate: 3deg;
+    border: 3px solid #070910;
+    background: var(--garage-red);
+    color: #fff;
+    padding: 0.45rem 0.75rem;
+    font-weight: 1000;
+    letter-spacing: 0.12em;
+    font-size: clamp(0.72rem, 1.4vw, 0.9rem);
+    line-height: 1;
+    box-shadow: 5px 5px 0 rgba(7, 9, 16, 0.24);
+  }
+
+  .work-projects-stage::after {
+    content: '';
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    bottom: 2rem;
+    z-index: 0;
+    height: 8rem;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, transparent 0 7%, rgba(7, 9, 16, 0.18) 7% 7.5%, transparent 7.5% 21%),
+      repeating-linear-gradient(
+        90deg,
+        transparent 0 4.5rem,
+        rgba(233, 65, 47, 0.1) 4.5rem 4.9rem,
+        transparent 4.9rem 8.75rem
+      ),
+      linear-gradient(180deg, transparent 0 42%, rgba(7, 9, 16, 0.16) 42% 45%, transparent 45% 56%, rgba(7, 9, 16, 0.1) 56% 58%, transparent 58%);
+    opacity: 0.28;
+    transform: rotate(-4deg);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .work-projects-stage > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .dual-lane-rail {
+    position: absolute;
+    left: 2rem;
+    right: 2rem;
+    top: 1.35rem;
+    z-index: 0;
+    display: grid;
+    gap: 0.55rem;
+    opacity: 0.34;
+    pointer-events: none;
+  }
+
+  .dual-lane-rail span {
+    height: 0.55rem;
+    border: 2px solid rgba(7, 9, 16, 0.38);
+    border-radius: 999px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(233, 65, 47, 0.28) 0 1rem,
+        rgba(233, 65, 47, 0.28) 1rem 1.6rem,
+        transparent 1.6rem 2.65rem
+      ),
+      rgba(255, 255, 255, 0.72);
+    box-shadow: 3px 3px 0 rgba(7, 9, 16, 0.12);
+  }
+
+  .dual-lane-rail span:nth-child(2) {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(36, 104, 255, 0.28) 0 1rem,
+        rgba(36, 104, 255, 0.28) 1rem 1.6rem,
+        transparent 1.6rem 2.65rem
+      ),
+      rgba(255, 255, 255, 0.72);
+    transform: translateX(2.2rem);
+  }
+
+  .work-projects-stage :is(h2, h3, p) {
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 640px) {
+    .work-projects-stage {
+      border-radius: 1.5rem;
+      box-shadow: 8px 8px 0 rgba(7, 9, 16, 0.45);
+    }
+
+    .work-projects-stage::before {
+      right: 0.8rem;
+      top: 0.8rem;
+    }
+
+    .race-ticket {
+      padding: 1.15rem;
+    }
+
+    .dual-lane-rail {
+      left: 1rem;
+      right: 1rem;
+      top: 0.95rem;
+      opacity: 0.42;
+    }
+  }
+
+  .start-lights {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 2;
+    display: flex;
+    gap: 0.35rem;
+    border: 2px solid #070910;
+    border-radius: 999px;
+    background: #070910;
+    padding: 0.35rem;
+    box-shadow: 3px 3px 0 rgba(7, 9, 16, 0.14);
+    transform: scale(0.86);
+    transform-origin: top right;
+  }
+
+  .start-lights span {
+    width: 0.78rem;
+    height: 0.78rem;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.35);
+  }
+
+  .scope-chip {
+    @apply inline-flex rounded-full border-2 border-racer-asphalt bg-white px-3 py-1.5 text-xs font-black uppercase tracking-[0.13em] text-racer-asphalt shadow-[3px_3px_0_rgba(7,9,16,0.16)];
+  }
+
+  .machine-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    border: 3px solid #070910;
+    box-shadow: 10px 10px 0 rgba(7, 9, 16, 0.22);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .machine-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 14px 14px 0 rgba(7, 9, 16, 0.3);
+  }
+
+  .machine-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 24% 12%, rgba(255, 255, 255, 0.9), transparent 10rem),
+      repeating-linear-gradient(
+        -14deg,
+        rgba(7, 9, 16, 0.035) 0 4px,
+        transparent 4px 18px
+      );
+    opacity: 0.78;
+  }
+
+  .machine-card::after {
+    content: '';
+    display: none;
+    position: absolute;
+    right: -4rem;
+    bottom: -2.75rem;
+    width: 16rem;
+    height: 7rem;
+    pointer-events: none;
+    border: 2px solid rgba(7, 9, 16, 0.14);
+    border-radius: 999px 36px 999px 36px;
+    background:
+      radial-gradient(circle at 18% 76%, rgba(7, 9, 16, 0.2) 0 0.65rem, transparent 0.7rem),
+      radial-gradient(circle at 82% 76%, rgba(7, 9, 16, 0.2) 0 0.65rem, transparent 0.7rem),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04));
+    opacity: 0.3;
+    transform: skewX(-16deg);
+  }
+
+  @media (min-width: 640px) {
+    .machine-card::after {
+      display: block;
+    }
+  }
+
+  .machine-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .machine-card-red {
+    background:
+      linear-gradient(90deg, var(--garage-red) 0 0.55rem, transparent 0.55rem),
+      linear-gradient(145deg, rgba(233, 65, 47, 0.16) 0%, rgba(255, 255, 255, 0.94) 34%, #fff7e8 100%);
+  }
+
+  .machine-card-blue {
+    background:
+      linear-gradient(90deg, var(--garage-blue) 0 0.55rem, transparent 0.55rem),
+      linear-gradient(145deg, rgba(36, 104, 255, 0.14) 0%, rgba(255, 255, 255, 0.94) 34%, #eef6ff 100%);
+  }
+
+  .machine-card-green {
+    background:
+      linear-gradient(90deg, var(--garage-teal) 0 0.55rem, transparent 0.55rem),
+      linear-gradient(145deg, rgba(18, 184, 141, 0.13) 0%, rgba(255, 255, 255, 0.94) 34%, #f1fff8 100%);
+  }
+
+  .mini-car-stripe {
+    position: relative;
+    height: 0.9rem;
+    overflow: hidden;
+    border: 2px solid rgba(7, 9, 16, 0.58);
+    border-radius: 999px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.75) 0 0.7rem,
+        transparent 0.7rem 1.35rem
+      ),
+      linear-gradient(90deg, currentColor 0%, rgba(255, 255, 255, 0.95) 42%, #ffd166 100%);
+    color: #ff4d2e;
+    box-shadow: 3px 3px 0 rgba(7, 9, 16, 0.16);
+    opacity: 0.9;
+  }
+
+  .mini-car-stripe::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    animation: hero-shine 4.8s ease-in-out infinite;
+  }
+
+  .machine-card-blue .mini-car-stripe {
+    color: #1f6fff;
+  }
+
+  .machine-card-green .mini-car-stripe {
+    color: #16c78f;
+  }
+
+  .decal-chip {
+    @apply inline-flex items-center rounded-full border-2 border-racer-asphalt bg-white px-3 py-1.5 text-xs font-black uppercase tracking-[0.12em] text-racer-asphalt shadow-[3px_3px_0_rgba(7,9,16,0.2)];
+  }
+
+  .timeline-lap {
+    @apply grid gap-4 rounded-[1.5rem] border-2 border-racer-asphalt bg-white/80 p-4 shadow-[5px_5px_0_rgba(7,9,16,0.16)] sm:grid-cols-[4rem_1fr];
+  }
+
+  .timeline-lap-number {
+    @apply flex h-14 w-14 items-center justify-center rounded-2xl border-2 border-racer-asphalt bg-racer-yellow text-xl font-black text-racer-asphalt shadow-[4px_4px_0_rgba(7,9,16,0.18)];
+  }
+
+  .blog-prose {
+    @apply prose max-w-none prose-headings:font-display prose-headings:tracking-[-0.04em] prose-headings:text-racer-asphalt prose-p:leading-8 prose-p:text-slate-800 prose-a:text-racer-flare prose-a:no-underline hover:prose-a:text-racer-asphalt prose-strong:text-racer-asphalt prose-code:text-racer-flare prose-pre:border-2 prose-pre:border-racer-asphalt prose-pre:bg-racer-asphalt prose-pre:text-slate-100 prose-blockquote:border-racer-flare prose-blockquote:text-slate-700 prose-li:text-slate-800;
+  }
+
+  .blog-prose h2,
+  .blog-prose h3 {
+    scroll-margin-top: 6rem;
+  }
+
+  .blog-prose code:not(pre code) {
+    @apply rounded-md border border-white/10 bg-white/10 px-1.5 py-0.5 text-sm;
+  }
+
+  .race-surface :is(.text-white, .text-slate-100, .text-slate-200) {
+    color: #070910 !important;
+  }
+
+  .race-surface .poster-button-dark {
+    color: #ffffff !important;
+  }
+
+  .race-surface :is(.text-slate-300, .text-slate-400, .text-slate-500, .text-gray-600, .text-gray-700) {
+    color: rgba(7, 9, 16, 0.68) !important;
+  }
+
+  .race-surface .text-racer-neon {
+    color: #008a68 !important;
+  }
+
+  .race-surface .border-white\/10 {
+    border-color: rgba(7, 9, 16, 0.18) !important;
+  }
+
+  .race-surface .bg-white\/5,
+  .race-surface .bg-white\/10 {
+    background-color: rgba(255, 255, 255, 0.72) !important;
+  }
+
+  .race-surface .bg-black\/20,
+  .race-surface .bg-black\/30 {
+    background-color: rgba(255, 255, 255, 0.72) !important;
   }
 }
 
-/* Mobile optimizations */
 @layer utilities {
   .touch-target {
     @apply min-h-[44px] min-w-[44px];
   }
-  
+
   .prevent-overflow {
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
   }
-  
-  /* Optimized scrolling experience */
+
   .momentum-scroll {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
   }
-} 
+}
+
+@keyframes hero-shine {
+  0%,
+  100% {
+    transform: translateX(-22%);
+    opacity: 0.42;
+  }
+  50% {
+    transform: translateX(18%);
+    opacity: 0.78;
+  }
+}
+
+@keyframes side-car-run {
+  from {
+    transform: translateY(-14rem);
+  }
+  to {
+    transform: translateY(calc(100vh + 22rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .side-car,
+  .mini-car-stripe::after {
+    animation: none;
+  }
+}

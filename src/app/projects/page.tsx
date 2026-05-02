@@ -1,7 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { withBasePath } from '@/utils/paths';
 
 // Projects data for Shawn He from resume
 const projects = [
@@ -68,11 +70,13 @@ export default function ProjectsPage() {
           {featuredProjects.map((project) => (
             <div key={project.id} className="card overflow-hidden">
               {/* Project Image */}
-              <div className="h-48 bg-gray-200 dark:bg-gray-700 overflow-hidden">
-                <img 
-                  src={project.image} 
+              <div className="relative h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
+                <Image
+                  src={withBasePath(project.image)} 
                   alt={`${project.title} preview`}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
                 />
               </div>
               {/* Project Details */}
@@ -123,11 +127,13 @@ export default function ProjectsPage() {
           {otherProjects.map((project) => (
             <div key={project.id} className="card p-4 sm:p-6">
               {/* Add image for other projects too */}
-              <div className="h-36 mb-3 bg-gray-200 dark:bg-gray-700 overflow-hidden rounded">
-                <img 
-                  src={project.image} 
+              <div className="relative mb-3 h-36 overflow-hidden rounded bg-gray-200 dark:bg-gray-700">
+                <Image
+                  src={withBasePath(project.image)} 
                   alt={`${project.title} preview`}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
                 />
               </div>
               <h3 className="text-lg sm:text-xl font-bold mb-2">{project.title}</h3>

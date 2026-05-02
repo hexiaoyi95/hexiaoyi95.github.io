@@ -1,104 +1,77 @@
 # Personal Website for Shawn He
 
-This is a personal website built with Next.js, TypeScript, and Tailwind CSS. It serves as a platform to showcase professional information, projects, publications, and blog posts.
+A static personal website built with Next.js, TypeScript, and Tailwind CSS. The current redesign uses an original mini 4WD-inspired visual system for the homepage, blog, navigation, and route structure.
 
 ## Features
 
-- Responsive design that works on all devices
-- Modern UI with Tailwind CSS
-- TypeScript support for better development experience
-- Easy to customize and extend
-- GitHub Pages deployment ready
+- Static export, suitable for GitLab Pages
+- Centralized route config in `src/config/routes.ts`
+- Centralized profile/site content in `src/config/site.ts`
+- Markdown blog pipeline with generated article routes and tag routes
+- Static `sitemap.xml`, `robots.txt`, and custom 404 page
 
-## Pages
+## Routes
 
-- **Home**: Introduction and overview
-- **Resume**: Detailed professional experience
-- **Publications**: Research papers and articles
-- **Projects**: Showcase of projects
-- **Blog**: Articles and thoughts
-- **Contact**: Information and contact form
+- `/` - Home overview
+- `/resume/` - Experience and CV
+- `/publications/` - Publications and patents
+- `/projects/` - Project archive
+- `/blog/` - Blog index
+- `/blog/[slug]/` - Blog article
+- `/blog/tag/[tag]/` - Static tag route
+- `/contact/` - Contact
 
-## Getting Started
+## Development
 
-### Prerequisites
+```bash
+npm install
+npm run dev
+```
 
-- Node.js (v14.0.0 or later)
-- npm or yarn
+Open `http://localhost:3000`.
 
-### Installation
+## Blog Content
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/hexiaoyi95/personal-website.git
-   cd personal-website
-   ```
+Add Markdown files to `src/content/blog`. Frontmatter supports:
 
-2. Install dependencies:
-   ```bash
-   npm install
-   # or
-   yarn
-   ```
+```yaml
+---
+title: "Post title"
+date: "March 30, 2025"
+excerpt: "Short summary"
+coverImage: "/images/blog/example.jpg"
+tags: ["Next.js", "Engineering"]
+readingTime: "8 min read"
+author:
+  name: "Shawn He"
+---
+```
 
-3. Run the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+If `readingTime` is omitted, the site calculates it from word count. If `coverImage` points to a missing file, the UI falls back to a generated racing plate instead of showing a broken image.
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## GitLab Pages
 
-## Customization
+The project is configured for GitLab Pages with `.gitlab-ci.yml`.
 
-### Personal Information
+For a standard project page such as:
 
-Update your personal information by editing the content in the following files:
+```text
+https://<namespace>.gitlab.io/<project-name>/
+```
 
-- `src/app/page.tsx` - Home page content
-- `src/app/resume/page.tsx` - Resume details
-- `src/app/publications/page.tsx` - Publication list
-- `src/app/projects/page.tsx` - Project showcase
-- `src/app/contact/page.tsx` - Contact information
+the CI sets:
 
-### Styling
+```bash
+NEXT_PUBLIC_BASE_PATH="/${CI_PROJECT_NAME}"
+NEXT_PUBLIC_SITE_URL="${CI_PAGES_URL}"
+```
 
-This project uses Tailwind CSS for styling. You can customize the theme by editing:
+For a custom domain or root namespace page, override `NEXT_PUBLIC_BASE_PATH` to an empty string in GitLab CI/CD variables.
 
-- `tailwind.config.js` - Customize colors, fonts, etc.
-- `src/styles/globals.css` - Global styles
+Manual static build:
 
-### Adding Images
+```bash
+npm run build
+```
 
-Place your images in the `public/images` directory and reference them in your components.
-
-## Deployment to GitHub Pages
-
-This project is configured to deploy to GitHub Pages. Follow these steps:
-
-1. Push your changes to GitHub:
-   ```bash
-   git add .
-   git commit -m "Update content"
-   git push
-   ```
-
-2. Deploy to GitHub Pages:
-   ```bash
-   npm run deploy
-   # or
-   yarn deploy
-   ```
-
-3. Your site will be available at `https://hexiaoyi95.github.io/`
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
-## Acknowledgments
-
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [React Icons](https://react-icons.github.io/react-icons/) 
+The exported site is generated in `out/`.

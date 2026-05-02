@@ -9,9 +9,9 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col bg-[#fffaf0] text-racer-asphalt">
       <Header />
-      <main className="flex-grow">{children}</main>
+      <main className="race-surface flex-grow">{children}</main>
       <Footer />
     </div>
   );

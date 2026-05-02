@@ -3,90 +3,88 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { FaBars, FaTimes } from 'react-icons/fa';
-
-const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Resume', href: '/resume' },
-  { name: 'Publications', href: '/publications' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' },
-];
+import { FaBars, FaBolt, FaTimes } from 'react-icons/fa';
+import { isActiveRoute, routes } from '@/config/routes';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   return (
-    <header className="bg-white dark:bg-night backdrop-blur-sm bg-opacity-90 dark:bg-opacity-90 shadow-sm sticky top-0 z-30">
-      {/* Aurora accent line at bottom of header */}
-      <div className="absolute bottom-0 left-0 right-0 h-0.5 aurora-gradient"></div>
-      
-      <div className="container mx-auto">
-        <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <Link href="/">
-                <span className="text-xl font-bold text-aurora dark:text-aurora-light">Shawn He</span>
-              </Link>
-            </div>
-          </div>
+    <header className="sticky top-0 z-40 border-b-[3px] border-racer-asphalt bg-[#fffaf0]/95 shadow-[0_6px_0_rgba(7,9,16,0.12)] backdrop-blur-xl">
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-racer-flare to-transparent" />
 
-          {/* Desktop navigation */}
-          <nav className="hidden md:ml-6 md:flex md:items-center md:space-x-4">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`${
-                  pathname === item.href
-                    ? 'nav-link-active'
-                    : 'nav-link'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between gap-4">
+          <Link href="/" className="group flex items-center gap-3">
+            <span className="grid h-10 w-10 place-items-center rounded-2xl border-2 border-racer-asphalt bg-white text-racer-asphalt shadow-[4px_4px_0_rgba(7,9,16,0.18)] transition group-hover:bg-racer-yellow">
+              <FaBolt className="h-4 w-4 transition group-hover:scale-110" />
+            </span>
+            <span>
+              <span className="block text-sm font-black uppercase tracking-[0.22em] text-racer-asphalt">
+                Shawn He
+              </span>
+              <span className="block text-[10px] font-black uppercase tracking-[0.28em] text-racer-flare">
+                Video AI Garage
+              </span>
+            </span>
+          </Link>
+
+          <nav className="hidden items-center rounded-full border-2 border-racer-asphalt bg-white p-1 shadow-[5px_5px_0_rgba(7,9,16,0.2)] md:flex">
+            {routes.map((item) => {
+              const isActive = isActiveRoute(pathname, item.href);
+
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] transition ${
+                    isActive
+                      ? 'bg-racer-asphalt text-white shadow-[3px_3px_0_rgba(7,9,16,0.18)]'
+                      : 'text-racer-asphalt/55 hover:bg-[#fff3c4] hover:text-racer-asphalt'
+                  }`}
+                >
+                  {item.shortLabel}
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* Mobile menu button */}
-          <div className="flex items-center md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-3 rounded-md text-gray-400 hover:text-aurora hover:bg-gray-100 dark:hover:bg-night-lighter focus:outline-none transition-colors"
-              aria-label="Toggle menu"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? (
-                <FaTimes className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <FaBars className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
+          <button
+            onClick={() => setIsOpen((value) => !value)}
+            className="grid h-11 w-11 place-items-center rounded-2xl border-2 border-racer-asphalt bg-white text-racer-asphalt shadow-[4px_4px_0_rgba(7,9,16,0.22)] transition hover:-translate-y-0.5 hover:bg-racer-yellow md:hidden"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <FaTimes className="h-5 w-5" /> : <FaBars className="h-5 w-5" />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile menu, show/hide based on menu state */}
-      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden transition-all duration-300 ease-in-out`}>
-        <div className="pt-2 pb-4 space-y-0">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`${
-                pathname === item.href
-                  ? 'bg-aurora bg-opacity-10 dark:bg-night-lighter text-aurora dark:text-aurora-light'
-                  : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-night-light hover:text-aurora dark:hover:text-aurora-light'
-              } block px-4 py-3 rounded-md text-base font-medium transition-colors`}
-              onClick={() => setIsOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
+      {isOpen && (
+        <div className="border-t-2 border-racer-asphalt bg-[#fffaf0] px-4 py-4 md:hidden">
+          <nav className="grid gap-2">
+            {routes.map((item) => {
+              const isActive = isActiveRoute(pathname, item.href);
+
+              return (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`rounded-2xl border px-4 py-3 transition ${
+                    isActive
+                      ? 'border-racer-asphalt bg-racer-asphalt text-white shadow-[4px_4px_0_rgba(7,9,16,0.18)]'
+                      : 'border-racer-asphalt bg-white text-racer-asphalt hover:bg-[#fff3c4]'
+                  }`}
+                >
+                  <span className="block text-sm font-bold">{item.label}</span>
+                  <span className="mt-1 block text-xs text-racer-asphalt/60">{item.description}</span>
+                </Link>
+              );
+            })}
+          </nav>
         </div>
-      </div>
+      )}
     </header>
   );
-} 
+}

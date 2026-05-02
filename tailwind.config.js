@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -51,26 +52,32 @@ module.exports = {
         },
         star: {
           DEFAULT: '#8CA6DB',
+        },
+        racer: {
+          asphalt: '#070910',
+          pit: '#111827',
+          panel: '#101522',
+          rail: '#263247',
+          neon: '#18F2B2',
+          flare: '#FF4D2E',
+          yellow: '#FFD166',
+          blue: '#48A6FF',
         }
       },
       fontFamily: {
         sans: [
-          'system-ui',
-          '-apple-system',
-          'BlinkMacSystemFont',
-          'Segoe UI',
-          'Roboto',
+          'Sora',
+          'Space Grotesk',
+          'Avenir Next',
           'Noto Sans',
           'Noto Sans SC',
           'Noto Sans TC',
           'PingFang SC',
           'Microsoft YaHei',
-          'Hiragino Sans GB',
-          'Helvetica Neue',
-          'Arial',
           'sans-serif',
         ],
         serif: [
+          'DM Serif Display',
           'Georgia',
           'Cambria',
           'Noto Serif',
@@ -80,6 +87,20 @@ module.exports = {
           'Times New Roman',
           'Times',
           'serif',
+        ],
+        display: [
+          'Sora',
+          'Space Grotesk',
+          'Avenir Next',
+          'Noto Sans SC',
+          'sans-serif',
+        ],
+        mono: [
+          'JetBrains Mono',
+          'SFMono-Regular',
+          'Cascadia Code',
+          'Menlo',
+          'monospace',
         ],
       },
       backgroundImage: {
