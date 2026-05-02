@@ -1,178 +1,191 @@
-'use client';
-
-import Link from 'next/link';
 import Image from 'next/image';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import Link from 'next/link';
+import { FaArrowRight, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { siteConfig } from '@/config/site';
 import { withBasePath } from '@/utils/paths';
 
-// Projects data for Shawn He from resume
-const projects = [
-  {
-    id: 'nvidia-smooth-motion',
-    title: 'NVIDIA Smooth Motion',
-    description: 'Core contributor to NVIDIA\'s driver-level frame generation solution.',
-    image: '/images/projects/SMOOTH-MOTION.png',
-    technologies: ['DLSS', 'Frame Generation', 'AI Graphics'],
-    links: [
-      { type: 'external', url: 'https://www.nvidia.com/en-us/geforce/news/nvidia-app-update-dlss-overrides-and-more/', label: 'Release Announcement' },
-    ],
-    featured: true,
-  },
+const archiveProjects = [
   {
     id: 'deep-learning-video-compression',
-    title: 'Deep Learning Based Video Compression',
-    description: 'Proposed a novel CNN utilizing partition information in video encoder to enhance compressed videos (deblocking). Achieved about 10% bitrate saving on benchmark sequences. Paper accepted by ICIP 2019 (oral) and won 2nd prize in ChinaMM 2018 challenge.',
+    title: 'Compressed Video Enhancement',
+    description:
+      'Research on partition-aware post-processing and deblocking for HEVC compressed videos. The work improved reconstructed video quality, achieved about 10% bitrate saving at similar quality, and led to ICIP 2019 / IEEE TMM publications.',
     image: '/images/projects/video-compression.png',
-    technologies: ['CNN', 'HEVC', 'Python', 'PyTorch', 'Video Processing'],
+    technologies: ['Compressed Video Enhancement', 'HEVC', 'CNN', 'Post-processing'],
     links: [
       { type: 'github', url: 'https://github.com/hexiaoyi95/Partition-aware', label: 'GitHub' },
       { type: 'external', url: 'https://arxiv.org/abs/1912.11604', label: 'Paper' },
-      { type: 'project', url: 'https://min.sjtu.edu.cn/lwydemo/HEVCpostprocessing.html', label: 'Project Page' },
+      { type: 'external', url: 'https://min.sjtu.edu.cn/lwydemo/HEVCpostprocessing.html', label: 'Project Page' },
     ],
-    featured: true,
   },
   {
     id: 'intelligent-surveillance-system',
     title: 'Intelligent Surveillance System',
-    description: 'Established a dataset for human fall detection. Developed a real-time deep learning based fall detection algorithm with over 80% accuracy. Won "Best Demo of the Year" award at Microsoft Research Asia Symposium in 2017.',
+    description:
+      'Built datasets and real-time deep learning systems for human fall detection and activity recognition, including a Microsoft Research Asia demo award project.',
     image: '/images/projects/surveillance.png',
-    technologies: ['Deep Learning', 'Computer Vision', 'Real-time Detection', 'Python'],
+    technologies: ['Deep Learning', 'Computer Vision', 'Real-time Detection'],
     links: [
       { type: 'external', url: 'https://www.microsoft.com/en-us/research/blog/visual-intelligence-smart-home-security/', label: 'Microsoft Research' },
     ],
-    featured: true,
   },
   {
     id: 'lossless-compression-for-skeletons',
-    title: 'Adaptive lossless compression of skeleton sequences',
-    description: 'Implemented a lossless compression method for skeletons data in videos based on spatial and temporal correlation. Achieved about 84% compression ratio on test surveillance sequences. Published two papers and had one proposal accepted.',
+    title: 'Adaptive Lossless Compression of Skeleton Sequences',
+    description:
+      'Implemented lossless compression for skeleton data in surveillance video using spatial and temporal correlation, with related papers and standards proposals.',
     image: '/images/projects/skeletons-compression.png',
-    technologies: ['Lossless Compression', 'Skeleton Tracking', 'C++', 'Video Analysis'],
+    technologies: ['Lossless Compression', 'Skeleton Tracking', 'C++'],
     links: [
       { type: 'external', url: 'https://www.sciencedirect.com/science/article/abs/pii/S0923596519306034', label: 'Paper' },
     ],
-    featured: true,
   },
 ];
 
 export default function ProjectsPage() {
-  const featuredProjects = projects.filter(project => project.featured);
-  const otherProjects = projects.filter(project => !project.featured);
-
   return (
-    <div className="container mx-auto py-8 px-4 sm:py-12 sm:px-4">
-      <h1 className="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8">Projects</h1>
-      
-      {/* Featured Projects */}
-      <section className="mb-10 sm:mb-16">
-        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Featured Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {featuredProjects.map((project) => (
-            <div key={project.id} className="card overflow-hidden">
-              {/* Project Image */}
-              <div className="relative h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
+    <div className="container mx-auto px-4 py-10 sm:py-14">
+      <section className="work-projects-stage p-5 sm:p-7 lg:p-9">
+        <div className="dual-lane-rail" aria-hidden="true">
+          <span />
+          <span />
+        </div>
+
+        <div className="max-w-4xl">
+          <p className="eyebrow">Video AI Portfolio</p>
+          <h1 className="mt-4 text-5xl font-black leading-[0.9] tracking-[-0.075em] text-racer-asphalt sm:text-7xl">
+            Selected Projects
+          </h1>
+          <p className="mt-5 max-w-3xl text-base font-bold leading-8 text-slate-800 sm:text-lg">
+            The same concise project set highlighted on the homepage, expanded here with links,
+            technical tags, and the historical project archive below.
+          </p>
+        </div>
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-6">
+          {siteConfig.featuredProjects.map((project, index) => (
+            <article
+              key={project.title}
+              className={`machine-card group flex min-h-[340px] flex-col p-5 sm:p-6 ${
+                index === 0
+                  ? 'machine-card-red lg:col-span-3'
+                  : index === 1
+                    ? 'machine-card-blue lg:col-span-3'
+                    : 'machine-card-green lg:col-span-6'
+              }`}
+            >
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.22em] text-racer-asphalt/60">
+                    {project.machine}
+                  </p>
+                  <h2 className="mt-2 text-2xl font-black leading-none tracking-[-0.07em] text-racer-asphalt sm:text-4xl">
+                    {project.title}
+                  </h2>
+                </div>
+                <span className="self-start rounded-full border-2 border-racer-asphalt bg-racer-yellow px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-racer-asphalt">
+                  {project.decal}
+                </span>
+              </div>
+
+              <div className="mt-6 mini-car-stripe" aria-hidden="true" />
+
+              <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-racer-asphalt/70">
+                {project.label}
+              </p>
+              <p className="mt-3 flex-1 text-[15px] font-bold leading-7 text-slate-800">
+                {project.description}
+              </p>
+
+              <div className="mt-5 grid gap-2 sm:grid-cols-3">
+                {project.highlights.map((highlight) => (
+                  <div
+                    key={highlight}
+                    className="rounded-2xl border-2 border-racer-asphalt bg-white/85 px-3 py-2 text-[11px] font-black uppercase tracking-[0.12em] text-racer-asphalt shadow-[3px_3px_0_rgba(7,9,16,0.22)] sm:text-xs"
+                  >
+                    {highlight}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="decal-chip">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <Link
+                href={project.href}
+                target={project.href.startsWith('http') ? '_blank' : undefined}
+                rel={project.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                className="mt-6 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-racer-asphalt transition hover:translate-x-1"
+              >
+                {project.ctaLabel}
+                <FaArrowRight />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <div className="mb-6">
+          <p className="eyebrow">Archive</p>
+          <h2 className="mt-2 text-3xl font-black tracking-[-0.055em] text-racer-asphalt sm:text-4xl">
+            Project Archive
+          </h2>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          {archiveProjects.map((project) => (
+            <article key={project.id} className="card flex flex-col">
+              <div className="relative h-44 overflow-hidden border-b-[3px] border-racer-asphalt bg-white">
                 <Image
-                  src={withBasePath(project.image)} 
+                  src={withBasePath(project.image)}
                   alt={`${project.title} preview`}
                   fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover"
                 />
               </div>
-              {/* Project Details */}
-              <div className="p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{project.description}</p>
-                
-                {/* Technologies */}
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech, index) => (
-                      <span 
-                        key={index} 
-                        className="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-800 text-sm rounded"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+
+              <div className="flex flex-1 flex-col p-5">
+                <h3 className="text-xl font-black tracking-[-0.04em] text-racer-asphalt">
+                  {project.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm font-bold leading-7 text-slate-700">
+                  {project.description}
+                </p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className="decal-chip">
+                      {tech}
+                    </span>
+                  ))}
                 </div>
-                
-                {/* Links */}
-                <div className="flex space-x-3">
-                  {project.links.map((link, idx) => (
-                    <Link 
-                      key={idx} 
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {project.links.map((link) => (
+                    <Link
+                      key={`${project.id}-${link.label}`}
                       href={link.url}
-                      className="inline-flex items-center px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
-                      target="_blank" 
+                      className="inline-flex items-center gap-2 rounded-full border-2 border-racer-asphalt bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.14em] text-racer-asphalt shadow-[3px_3px_0_rgba(7,9,16,0.16)] transition hover:-translate-y-0.5 hover:bg-racer-yellow"
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {link.type === 'github' && <FaGithub className="mr-1" />}
-                      {link.type === 'external' && <FaExternalLinkAlt className="mr-1" />}
+                      {link.type === 'github' ? <FaGithub /> : <FaExternalLinkAlt />}
                       {link.label}
                     </Link>
                   ))}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      
-      {/* Other Projects */}
-      <section>
-        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Other Projects</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {otherProjects.map((project) => (
-            <div key={project.id} className="card p-4 sm:p-6">
-              {/* Add image for other projects too */}
-              <div className="relative mb-3 h-36 overflow-hidden rounded bg-gray-200 dark:bg-gray-700">
-                <Image
-                  src={withBasePath(project.image)} 
-                  alt={`${project.title} preview`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover"
-                />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold mb-2">{project.title}</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 text-sm sm:text-base">{project.description}</p>
-              
-              {/* Technologies */}
-              <div className="mb-4">
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, index) => (
-                    <span 
-                      key={index} 
-                      className="inline-block px-2 py-1 bg-gray-100 dark:bg-gray-800 text-sm rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Links */}
-              <div className="flex space-x-3">
-                {project.links.map((link, idx) => (
-                  <Link 
-                    key={idx} 
-                    href={link.url}
-                    className="inline-flex items-center px-3 py-1 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    {link.type === 'github' && <FaGithub className="mr-1" />}
-                    {link.type === 'external' && <FaExternalLinkAlt className="mr-1" />}
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>
     </div>
   );
-} 
+}

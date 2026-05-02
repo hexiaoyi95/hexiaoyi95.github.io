@@ -109,8 +109,9 @@ export default function AboutPage() {
                 <div className="text-lg font-semibold">Research Assistant</div>
                 <div className="text-primary-600 dark:text-primary-400">Shanghai Jiao Tong University • 2015 - 2019</div>
                 <div className="mt-2">
-                  Worked under Prof. Weiyao Lin on Action Recognition, DL-based Video Compression, and Features Compression.
-                  Developed algorithms for image/video enhancement and compression using deep learning.
+                  Worked under Prof. Weiyao Lin on action recognition, compressed video enhancement,
+                  and feature / skeleton sequence compression. Developed deep learning post-processing
+                  methods for compressed image and video quality improvement.
                 </div>
               </div>
               

@@ -25,7 +25,7 @@ export default function Header() {
                 Shawn He
               </span>
               <span className="block text-[10px] font-black uppercase tracking-[0.28em] text-racer-flare">
-                Video AI Garage
+                Real-Time Video AI
               </span>
             </span>
           </Link>

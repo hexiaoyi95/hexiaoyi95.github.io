@@ -6,10 +6,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${siteConfig.name} - Video AI Garage`,
+  title: `${siteConfig.name} - Real-Time Video AI`,
   description: siteConfig.tagline,
   openGraph: {
-    title: `${siteConfig.name} - Video AI Garage`,
+    title: `${siteConfig.name} - Real-Time Video AI`,
     description: siteConfig.tagline,
     type: 'website',
   },

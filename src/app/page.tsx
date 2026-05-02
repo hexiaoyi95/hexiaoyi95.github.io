@@ -2,19 +2,59 @@ import Link from 'next/link';
 import {
   FaArrowRight,
   FaBookOpen,
-  FaCodeBranch,
-  FaFire,
+  FaEnvelope,
   FaFlagCheckered,
   FaGithub,
   FaLinkedin,
   FaTachometerAlt,
 } from 'react-icons/fa';
 import { siteConfig } from '@/config/site';
-import { getAllBlogPostSummaries } from '@/utils/blog';
+
+const quickLinks = [
+  {
+    title: 'Resume',
+    href: '/resume',
+    icon: <FaFlagCheckered />,
+  },
+  {
+    title: 'Projects',
+    href: '/projects',
+    icon: <FaTachometerAlt />,
+  },
+  {
+    title: 'Blog',
+    href: '/blog',
+    icon: <FaBookOpen />,
+  },
+  {
+    title: 'Contact',
+    href: '/contact',
+    icon: <FaEnvelope />,
+  },
+];
+
+const technicalFocusAreas = [
+  {
+    label: 'Motion Generation',
+    title: 'Frame generation systems',
+    summary: 'Game and video frame generation, including DLSS-related research and NVIDIA Smooth Motion.',
+    href: '/projects',
+  },
+  {
+    label: 'Motion Estimation',
+    title: 'Optical flow and OFA',
+    summary: 'Optical-flow accelerator quality, confidence estimation, and deployment-oriented motion signals.',
+    href: '/resume',
+  },
+  {
+    label: 'Visual Quality',
+    title: 'Video enhancement pipelines',
+    summary: 'Compression-aware enhancement, super resolution, adaptive preprocessing, and quality evaluation.',
+    href: '/projects',
+  },
+];
 
 export default function HomePage() {
-  const latestPosts = getAllBlogPostSummaries().slice(0, 2);
-
   return (
     <div>
       <div className="side-mini-cars" aria-hidden="true">
@@ -22,245 +62,172 @@ export default function HomePage() {
         <span className="side-car side-car-right side-car-blue" />
       </div>
 
-      <section className="container mx-auto px-4 py-6 sm:py-8">
-        <div className="identity-strip">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-racer-flare">
-              SH-AI-95 / Video AI Garage
-            </p>
-            <h1 className="mt-2 text-xl font-black tracking-[-0.055em] text-racer-asphalt sm:text-4xl">
-              {siteConfig.name} · {siteConfig.title}
-            </h1>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            <Link href="/resume" className="poster-button poster-button-dark">
-              Resume
-              <FaFlagCheckered />
-            </Link>
-            <Link
-              href="https://github.com/hexiaoyi95"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="poster-icon"
-              aria-label="GitHub"
-            >
-              <FaGithub />
-            </Link>
-            <Link
-              href="https://linkedin.com/in/xiaoyihe"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="poster-icon"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="container mx-auto px-4 pb-12">
+      <section className="container mx-auto px-4 py-8 sm:py-12">
         <div className="work-projects-stage p-5 sm:p-7 lg:p-9">
           <div className="dual-lane-rail" aria-hidden="true">
             <span />
             <span />
           </div>
 
-          <div className="poster-hero-grid">
+          <div className="grid gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
             <div>
-              <div className="inline-flex items-center gap-3 rounded-full border-2 border-racer-asphalt bg-racer-yellow px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-racer-asphalt shadow-[5px_5px_0_rgba(7,9,16,0.24)]">
-                <FaFire className="text-racer-flare" />
-                Video AI Portfolio
-              </div>
-              <h2 className="mt-5 max-w-5xl text-4xl font-black leading-[0.9] tracking-[-0.085em] text-racer-asphalt sm:text-7xl lg:text-8xl">
-                Selected Projects
-              </h2>
-              <p className="mt-5 max-w-3xl text-base font-bold leading-8 text-slate-800 sm:text-lg">
-                A concise overview of production and research work across frame generation,
-                optical flow, real-time graphics, and video compression systems.
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-racer-flare">
+                Video AI Algorithms / Motion / Quality
               </p>
+              <h1 className="mt-4 max-w-4xl text-5xl font-black leading-[0.9] tracking-[-0.08em] text-racer-asphalt sm:text-7xl">
+                {siteConfig.name}
+                <span className="mt-2 block text-3xl tracking-[-0.04em] text-racer-flare sm:text-5xl">
+                  {siteConfig.chineseName}
+                </span>
+              </h1>
+              <p className="mt-4 max-w-3xl text-xl font-black tracking-[-0.045em] text-racer-asphalt sm:text-3xl">
+                Senior Video Architect building AI systems for motion and visual quality.
+              </p>
+              <p className="mt-5 max-w-3xl text-base font-bold leading-8 text-slate-800 sm:text-lg">
+                My work connects NVIDIA frame generation and OFA/optical-flow research, Bilibili
+                video quality pipelines, Alibaba super-resolution work, and SJTU compressed video
+                enhancement research.
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {siteConfig.skills.slice(0, 6).map((skill) => (
+                  <span key={skill} className="tag-chip">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link href="/projects" className="btn">
+                  View projects
+                  <FaArrowRight />
+                </Link>
+                <Link href="/resume" className="btn btn-secondary">
+                  Resume
+                  <FaFlagCheckered />
+                </Link>
+                <Link
+                  href="https://github.com/hexiaoyi95"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="poster-icon"
+                  aria-label="GitHub"
+                >
+                  <FaGithub />
+                </Link>
+                <Link
+                  href="https://linkedin.com/in/xiaoyihe"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="poster-icon"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin />
+                </Link>
+              </div>
             </div>
 
-            <div className="race-ticket lg:col-span-2 xl:col-span-1">
+            <aside className="race-ticket">
               <div className="start-lights" aria-hidden="true">
                 <span className="bg-racer-flare" />
                 <span className="bg-racer-yellow" />
                 <span className="bg-racer-neon" />
               </div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-racer-flare">
-                Technical Scope
+                Technical Focus
               </p>
-              <p className="mt-3 text-2xl font-black tracking-[-0.055em] text-racer-asphalt sm:text-4xl">
-                Real-time AI video systems.
-              </p>
-              <p className="mt-3 text-sm font-bold leading-6 text-slate-700">
-                Frame generation, optical flow, and production video pipelines.
-              </p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {siteConfig.stats.slice(1, 4).map((stat) => (
-                  <span key={stat.label} className="scope-chip">
-                    {stat.value}
-                  </span>
+              <h2 className="mt-3 text-3xl font-black leading-none tracking-[-0.06em] text-racer-asphalt">
+                Core areas across recent work
+              </h2>
+              <div className="mt-5 grid gap-3">
+                {technicalFocusAreas.map((area) => (
+                  <Link
+                    key={area.title}
+                    href={area.href}
+                    className="rounded-3xl border-2 border-racer-asphalt bg-white p-4 shadow-[4px_4px_0_rgba(7,9,16,0.16)] transition hover:-translate-y-0.5 hover:bg-[#fff3c4]"
+                  >
+                    <p className="text-[10px] font-black uppercase tracking-[0.18em] text-racer-asphalt/55">
+                      {area.label}
+                    </p>
+                    <h3 className="mt-2 text-xl font-black tracking-[-0.05em] text-racer-asphalt">
+                      {area.title}
+                    </h3>
+                    <p className="mt-2 text-sm font-bold leading-6 text-slate-700">
+                      {area.summary}
+                    </p>
+                  </Link>
                 ))}
               </div>
-            </div>
+            </aside>
           </div>
 
-          <div className="mt-8 grid gap-5 lg:grid-cols-6">
-            {siteConfig.featuredProjects.map((project, index) => (
-              <article
-                key={project.title}
-                className={`machine-card group flex min-h-[360px] flex-col p-5 sm:p-6 ${
-                  index === 0
-                    ? 'machine-card-red lg:col-span-3'
-                    : index === 1
-                      ? 'machine-card-blue lg:col-span-3'
-                    : 'machine-card-green lg:col-span-6'
-                }`}
-              >
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                  <div>
-                    <p className="text-xs font-black uppercase tracking-[0.22em] text-racer-asphalt/60">
-                      {project.machine}
-                    </p>
-                    <h3 className="mt-2 text-2xl font-black leading-none tracking-[-0.07em] text-racer-asphalt sm:text-4xl">
-                      {project.title}
-                    </h3>
-                  </div>
-                  <span className="self-start rounded-full border-2 border-racer-asphalt bg-racer-yellow px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-racer-asphalt">
-                    {project.decal}
-                  </span>
-                </div>
-
-                <div className="mt-6 mini-car-stripe" aria-hidden="true" />
-
-                <p className="mt-5 text-sm font-black uppercase tracking-[0.18em] text-racer-asphalt/70">
-                  {project.label}
-                </p>
-                <p className="mt-3 flex-1 text-[15px] font-bold leading-7 text-slate-800">
-                  {project.description}
-                </p>
-
-                <div className="mt-5 grid gap-2 sm:grid-cols-3 lg:grid-cols-1 xl:grid-cols-3">
-                  {project.highlights.map((highlight) => (
-                    <div
-                      key={highlight}
-                      className="rounded-2xl border-2 border-racer-asphalt bg-white/85 px-3 py-2 text-[11px] font-black uppercase tracking-[0.12em] text-racer-asphalt shadow-[3px_3px_0_rgba(7,9,16,0.22)] sm:text-xs"
-                    >
-                      {highlight}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="decal-chip">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-
-                <Link
-                  href={project.href}
-                  target={project.href.startsWith('http') ? '_blank' : undefined}
-                  rel={project.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-racer-asphalt transition hover:translate-x-1"
-                >
-                  Open project
-                  <FaArrowRight />
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="container mx-auto grid gap-5 px-4 py-8 lg:grid-cols-[1.15fr_0.85fr]">
-        <div className="track-card p-6 sm:p-8">
-          <div className="flex items-center justify-between gap-4">
+          <div className="mt-12 grid gap-6 lg:grid-cols-[0.34fr_0.66fr] lg:items-start">
             <div>
-              <p className="eyebrow">Experience</p>
-              <h2 className="mt-2 text-4xl font-black tracking-[-0.06em] text-white">
-                Experience Track
+              <p className="eyebrow">Recent News</p>
+              <h2 className="mt-2 text-3xl font-black tracking-[-0.055em] text-racer-asphalt sm:text-5xl">
+                Recent updates
               </h2>
-            </div>
-            <FaTachometerAlt className="h-8 w-8 text-racer-yellow" />
-          </div>
-
-          <div className="mt-7 grid gap-4">
-            {siteConfig.timeline.map((item, index) => (
-              <article key={item.company} className="timeline-lap">
-                <div className="timeline-lap-number">{String(index + 1).padStart(2, '0')}</div>
-                <div>
-                  <p className="text-xs font-black uppercase tracking-[0.2em] text-racer-yellow">
-                    {item.period} · {item.speed}
-                  </p>
-                  <h3 className="mt-2 text-2xl font-black tracking-[-0.04em] text-white">
-                    {item.company}
-                  </h3>
-                  <p className="mt-1 font-bold text-racer-neon">{item.role}</p>
-                  <p className="mt-3 leading-7 text-slate-400">{item.summary}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid gap-5">
-          <div className="track-card p-6">
-            <p className="eyebrow">Profile</p>
-            <h2 className="mt-3 text-3xl font-black tracking-[-0.055em] text-white">
-              {siteConfig.chineseName}
-            </h2>
-            <p className="mt-4 leading-8 text-slate-300">{siteConfig.tagline}</p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {siteConfig.skills.map((skill) => (
-                <span key={skill} className="tag-chip">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="track-card p-6">
-            <div className="mb-5 flex items-center justify-between gap-4">
-              <div>
-                <p className="eyebrow">Latest Writing</p>
-                <h2 className="mt-2 text-3xl font-black tracking-[-0.055em] text-white">
-                  Latest Writing
-                </h2>
-              </div>
-              <FaBookOpen className="h-8 w-8 text-racer-yellow" />
+              <p className="mt-3 text-sm font-bold leading-6 text-slate-700">
+                Short signals only. Detailed project context lives on the Projects page.
+              </p>
+              <Link
+                href="/projects"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.18em] text-racer-asphalt transition hover:translate-x-1"
+              >
+                Project details
+                <FaArrowRight />
+              </Link>
             </div>
 
             <div className="grid gap-3">
-              {latestPosts.map((post) => (
-                <Link
-                  key={post.slug}
-                  href={post.href}
-                  className="rounded-3xl border border-white/10 bg-black/20 p-4 transition hover:border-racer-neon/40 hover:bg-black/30"
+              {siteConfig.news.map((item) => (
+                <article
+                  key={item.title}
+                  className="rounded-3xl border-2 border-racer-asphalt bg-white/85 p-4 shadow-[4px_4px_0_rgba(7,9,16,0.14)]"
                 >
-                  <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.18em] text-slate-500">
-                    <span>{post.displayDate}</span>
-                    <span className="h-1 w-1 rounded-full bg-racer-flare" />
-                    <span>{post.readingTime}</span>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-xs font-black uppercase tracking-[0.18em] text-racer-flare">
+                        {item.date} / {item.type}
+                      </p>
+                      <h3 className="mt-2 text-xl font-black tracking-[-0.045em] text-racer-asphalt">
+                        {item.title}
+                      </h3>
+                    </div>
+                    {item.href && (
+                      <Link
+                        href="/projects"
+                        className="inline-flex shrink-0 items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-racer-asphalt transition hover:translate-x-1"
+                      >
+                        Read more
+                        <FaArrowRight />
+                      </Link>
+                    )}
                   </div>
-                  <h3 className="mt-2 font-black text-white">{post.title}</h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-400">
-                    {post.excerpt}
-                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <p className="eyebrow">Start Here</p>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {quickLinks.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="group flex items-center justify-between rounded-3xl border-2 border-racer-asphalt bg-white/85 p-4 shadow-[5px_5px_0_rgba(7,9,16,0.16)] transition hover:-translate-y-1 hover:bg-racer-yellow"
+                >
+                  <span className="flex items-center gap-3 text-lg font-black tracking-[-0.04em] text-racer-asphalt">
+                    <span className="grid h-10 w-10 place-items-center rounded-2xl border-2 border-racer-asphalt bg-white text-racer-asphalt shadow-[3px_3px_0_rgba(7,9,16,0.16)]">
+                      {item.icon}
+                    </span>
+                    {item.title}
+                  </span>
+                  <FaArrowRight className="text-racer-asphalt transition group-hover:translate-x-1" />
                 </Link>
               ))}
             </div>
-
-            <Link
-              href="/blog"
-              className="mt-5 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-racer-neon hover:text-white"
-            >
-              View all posts
-              <FaCodeBranch />
-            </Link>
           </div>
         </div>
       </section>

@@ -108,7 +108,7 @@ const experience: ExperienceItem[] = [
     period: '2015 - 2019',
     description: [
       {
-        text: 'Advisor: Prof. Weiyao Lin. Focused on Action Recognition, DL-based Video Compression, and Features Compression',
+        text: 'Advisor: Prof. Weiyao Lin. Focused on action recognition, compressed video enhancement, and feature / skeleton sequence compression',
         subItems: []
       },
       {
@@ -167,7 +167,7 @@ const projects = [
   {
     title: 'End-to-end Deep Learning Based Image/Video Compression',
     period: '2019 - 2020',
-    description: 'Surveyed on end-to-end deep learning based image/video compression. Implemented novel ideas and experimental verifications.',
+    description: 'Surveyed end-to-end learned image/video coding and implemented experimental ideas for compression-related research.',
   },
   {
     title: 'Lossless Compression for Skeletons Data in Surveillance Videos',
@@ -175,7 +175,7 @@ const projects = [
     description: 'Implemented a lossless compression method for skeletons data in videos based on spatial and temporal correlation. Achieved about 84% compression ratio on test surveillance sequences. Published two papers and had one proposal accepted.',
   },
   {
-    title: 'Deep Learning Based Video Compression',
+    title: 'Deep Learning Based Compressed Video Enhancement',
     period: '2017 - 2018',
     description: 'Proposed a novel CNN utilizing partition information in video encoder to enhance compressed videos (deblocking). Achieved about 10% bitrate saving on benchmark sequences. Paper accepted by ICIP 2019 (oral), IEEE Transactions on Multimedia 2020 and won 2nd prize in ChinaMM 2018 challenge.',
   },
@@ -194,6 +194,7 @@ const skills = {
     'Research Areas: Computer Vision, Video Compression, Deep Learning',
   ],
   achievements: [
+    'One paper accepted by NVIDIA internal conference (NTech 2025)',
     'One paper about frame generation is accepted by NVIDIA internal conference (NTech 2024, 200/900+ submissions)',
     'Second prize in "Deep-learning based Post Processing for Compressed Images" challenge (ChinaMM 2018)',
     <a key="msra-best-demo" href="https://www.microsoft.com/en-us/research/blog/visual-intelligence-smart-home-security/" target="_blank" rel="noopener noreferrer" className="text-aurora hover:text-aurora-dark">Best Demo of The Year Award at Microsoft Research Asia Symposium</a>,
@@ -233,6 +234,7 @@ export default function ResumePage() {
         
         // Clone the content to prevent modifications to the actual DOM
         const clonedContent = resumeRef.current.cloneNode(true) as HTMLElement;
+        clonedContent.classList.add('pdf-export');
         
         // Remove the download button from the cloned content
         const downloadButton = clonedContent.querySelector('.download-btn');
