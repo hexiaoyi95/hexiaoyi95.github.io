@@ -131,6 +131,21 @@
     animation: side-car-run 13s linear infinite;
   }
 
+  @supports (animation-timeline: scroll()) {
+    .side-car {
+      animation-duration: 1ms;
+      animation-fill-mode: both;
+      animation-iteration-count: 1;
+      animation-timeline: scroll(root block);
+      animation-range: 0% 100%;
+    }
+
+    .side-car-right {
+      animation-name: side-car-run-reverse;
+      animation-delay: 0s;
+    }
+  }
+
   .side-car-left {
     left: max(0.65rem, calc((100vw - 82rem) / 2 - 6.8rem));
   }
@@ -444,6 +459,92 @@
     overflow-wrap: anywhere;
   }
 
+  .hero-intro {
+    animation: hero-enter 720ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+  }
+
+  .hero-kicker {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+  }
+
+  .hero-kicker::after {
+    content: '';
+    position: absolute;
+    inset: -0.15rem;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
+    transform: translateX(-120%);
+    animation: scanline-sweep 950ms 260ms cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+
+  .kinetic-title {
+    animation: title-tighten 820ms 80ms cubic-bezier(0.18, 0.9, 0.18, 1) both;
+  }
+
+  .mechanical-card {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    background-color: rgba(255, 255, 255, 0.88);
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .mechanical-card::before {
+    content: '';
+    position: absolute;
+    left: 0.85rem;
+    right: 0.85rem;
+    top: 0.65rem;
+    height: 0.28rem;
+    border-radius: 999px;
+    background:
+      repeating-linear-gradient(90deg, var(--garage-red) 0 1.1rem, transparent 1.1rem 1.75rem),
+      linear-gradient(90deg, var(--garage-red), var(--garage-blue));
+    opacity: 0;
+    transform: scaleX(0.62);
+    transform-origin: left;
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  .mechanical-card:hover {
+    transform: translate(-3px, -3px);
+    border-color: #070910;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(243, 184, 75, 0.24), transparent 7rem),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.96), #fff3c4) !important;
+    box-shadow: 9px 9px 0 rgba(7, 9, 16, 0.28) !important;
+  }
+
+  .mechanical-card:hover::before {
+    opacity: 0.88;
+    transform: scaleX(1);
+  }
+
+  .reveal-item {
+    animation: reveal-lap 620ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+    animation-delay: calc(var(--reveal-index, 0) * 90ms);
+  }
+
+  @supports (animation-timeline: view()) {
+    .reveal-group {
+      view-timeline-name: --reveal-group;
+      view-timeline-axis: block;
+    }
+
+    .reveal-group .reveal-item {
+      animation-timeline: view();
+      animation-range: entry 8% cover 24%;
+      animation-delay: calc(var(--reveal-index, 0) * 65ms);
+    }
+  }
+
   @media (max-width: 640px) {
     .work-projects-stage {
       border-radius: 1.5rem;
@@ -710,9 +811,71 @@
   }
 }
 
+@keyframes side-car-run-reverse {
+  from {
+    transform: translateY(calc(100vh + 22rem));
+  }
+  to {
+    transform: translateY(-14rem);
+  }
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes title-tighten {
+  from {
+    opacity: 0;
+    letter-spacing: -0.01em;
+    transform: translateX(-0.45rem);
+  }
+  to {
+    opacity: 1;
+    letter-spacing: -0.08em;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scanline-sweep {
+  from {
+    transform: translateX(-120%);
+  }
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes reveal-lap {
+  from {
+    opacity: 0;
+    transform: translateY(1.2rem) rotate(-0.35deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .side-car,
-  .mini-car-stripe::after {
-    animation: none;
+  .mini-car-stripe::after,
+  .hero-intro,
+  .hero-kicker::after,
+  .kinetic-title,
+  .reveal-item {
+    animation: none !important;
+  }
+
+  .mechanical-card,
+  .mechanical-card:hover {
+    transform: none;
   }
 }

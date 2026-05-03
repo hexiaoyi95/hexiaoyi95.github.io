@@ -70,11 +70,11 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-8 lg:grid-cols-[1.12fr_0.88fr] lg:items-end">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.24em] text-racer-flare">
+            <div className="hero-intro">
+              <p className="hero-kicker text-xs font-black uppercase tracking-[0.24em] text-racer-flare">
                 Video AI Algorithms / Motion / Quality
               </p>
-              <h1 className="mt-4 max-w-4xl text-5xl font-black leading-[0.9] tracking-[-0.08em] text-racer-asphalt sm:text-7xl">
+              <h1 className="kinetic-title mt-4 max-w-4xl text-5xl font-black leading-[0.9] tracking-[-0.08em] text-racer-asphalt sm:text-7xl">
                 {siteConfig.name}
                 <span className="mt-2 block text-3xl tracking-[-0.04em] text-racer-flare sm:text-5xl">
                   {siteConfig.chineseName}
@@ -139,12 +139,13 @@ export default function HomePage() {
               <h2 className="mt-3 text-3xl font-black leading-none tracking-[-0.06em] text-racer-asphalt">
                 Core areas across recent work
               </h2>
-              <div className="mt-5 grid gap-3">
-                {technicalFocusAreas.map((area) => (
+              <div className="reveal-group mt-5 grid gap-3">
+                {technicalFocusAreas.map((area, index) => (
                   <Link
                     key={area.title}
                     href={area.href}
-                    className="rounded-3xl border-2 border-racer-asphalt bg-white p-4 shadow-[4px_4px_0_rgba(7,9,16,0.16)] transition hover:-translate-y-0.5 hover:bg-[#fff3c4]"
+                    style={{ '--reveal-index': index } as React.CSSProperties}
+                    className="mechanical-card reveal-item rounded-3xl border-2 border-racer-asphalt bg-white p-4 shadow-[4px_4px_0_rgba(7,9,16,0.16)]"
                   >
                     <p className="text-[10px] font-black uppercase tracking-[0.18em] text-racer-asphalt/55">
                       {area.label}
@@ -179,11 +180,12 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="grid gap-3">
-              {siteConfig.news.map((item) => (
+            <div className="reveal-group grid gap-3">
+              {siteConfig.news.map((item, index) => (
                 <article
                   key={item.title}
-                  className="rounded-3xl border-2 border-racer-asphalt bg-white/85 p-4 shadow-[4px_4px_0_rgba(7,9,16,0.14)]"
+                  style={{ '--reveal-index': index } as React.CSSProperties}
+                  className="mechanical-card reveal-item rounded-3xl border-2 border-racer-asphalt bg-white/85 p-4 shadow-[4px_4px_0_rgba(7,9,16,0.14)]"
                 >
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
@@ -211,12 +213,13 @@ export default function HomePage() {
 
           <div className="mt-12">
             <p className="eyebrow">Start Here</p>
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {quickLinks.map((item) => (
+            <div className="reveal-group mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {quickLinks.map((item, index) => (
                 <Link
                   key={item.title}
                   href={item.href}
-                  className="group flex items-center justify-between rounded-3xl border-2 border-racer-asphalt bg-white/85 p-4 shadow-[5px_5px_0_rgba(7,9,16,0.16)] transition hover:-translate-y-1 hover:bg-racer-yellow"
+                  style={{ '--reveal-index': index } as React.CSSProperties}
+                  className="mechanical-card reveal-item group flex items-center justify-between rounded-3xl border-2 border-racer-asphalt bg-white/85 p-4 shadow-[5px_5px_0_rgba(7,9,16,0.16)]"
                 >
                   <span className="flex items-center gap-3 text-lg font-black tracking-[-0.04em] text-racer-asphalt">
                     <span className="grid h-10 w-10 place-items-center rounded-2xl border-2 border-racer-asphalt bg-white text-racer-asphalt shadow-[3px_3px_0_rgba(7,9,16,0.16)]">
